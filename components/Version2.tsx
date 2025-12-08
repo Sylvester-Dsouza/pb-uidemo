@@ -14,11 +14,11 @@ const Version2: React.FC = () => {
 
       {/* Subtle Background Elements */}
       <div className="fixed top-0 left-0 w-full h-screen overflow-hidden -z-10 pointer-events-none">
-        <div className="absolute top-[-5%] right-[10%] w-[400px] h-[400px] bg-rose-200/20 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-[10%] left-[5%] w-[500px] h-[500px] bg-amber-200/15 rounded-full blur-[120px]"></div>
+        <div className="absolute top-[-5%] right-[10%] w-[400px] h-[400px] bg-rose-200/20 rounded-full blur-[120px] animate-pulse-soft"></div>
+        <div className="absolute bottom-[10%] left-[5%] w-[500px] h-[500px] bg-amber-200/15 rounded-full blur-[120px] animate-pulse-soft" style={{animationDelay: '1s'}}></div>
       </div>
 
-      <div className="container mx-auto px-6 py-12 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 py-8 lg:py-20">
 
         {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-xs font-medium tracking-wider text-slate-400 uppercase mb-10">
@@ -57,7 +57,7 @@ const Version2: React.FC = () => {
             </div>
 
             
-            <div className="hidden lg:flex gap-4">
+            <div className="hidden lg:flex gap-4 animate-fade-in">
               <div className="flex flex-col gap-3">
                 {productData.images.map((img, idx) => (
                   <button
@@ -73,7 +73,7 @@ const Version2: React.FC = () => {
                 ))}
               </div>
 
-              <div className="relative flex-1 aspect-square bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-12 flex items-center justify-center overflow-hidden group border border-slate-100">
+              <div className="relative flex-1 aspect-square bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-12 flex items-center justify-center overflow-hidden group border border-slate-100 animate-scale-in">
                 <div className="absolute inset-0 bg-gradient-to-br from-white via-slate-50/50 to-rose-50/30"></div>
 
                 <img
@@ -101,7 +101,7 @@ const Version2: React.FC = () => {
           </div>
 
           {/* RIGHT: Product Details */}
-          <div className="flex flex-col">
+          <div className="flex flex-col animate-fade-in-up">
 
             
 
@@ -145,7 +145,7 @@ const Version2: React.FC = () => {
               </div>
 
               {/* Add to Cart Button */}
-              <button className="w-full bg-slate-900 text-white font-semibold text-base py-4 rounded-full shadow-lg shadow-slate-900/20 hover:shadow-xl hover:bg-slate-800 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-3 group">
+              <button className="w-full bg-slate-900 text-white font-semibold text-base py-4 rounded-full shadow-lg shadow-slate-900/20 hover:shadow-xl hover:bg-slate-800 transition-all transform hover:-translate-y-1 hover:scale-[1.02] flex items-center justify-center gap-3 group">
                 <span>Add to Basket</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>

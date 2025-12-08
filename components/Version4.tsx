@@ -15,7 +15,7 @@ const Version4: React.FC = () => {
 
             {/* Breadcrumbs */}
             <div className="bg-white border-b border-gray-200">
-                <div className="max-w-7xl mx-auto px-6 py-3">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
                     <div className="flex items-center gap-2 text-sm text-gray-500">
                         <span className="hover:text-gray-900 cursor-pointer">Home</span>
                         <span>/</span>
@@ -29,7 +29,7 @@ const Version4: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="max-w-7xl mx-auto px-6 py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
                     {/* Left Side - Image Gallery */}
@@ -57,7 +57,7 @@ const Version4: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="hidden lg:flex gap-4">
+                            <div className="hidden lg:flex gap-4 animate-fade-in">
                                 {/* Vertical Thumbnails */}
                                 <div className="flex flex-col gap-3">
                                     {allImages.map((img, idx) => (
@@ -79,7 +79,7 @@ const Version4: React.FC = () => {
                                 </div>
 
                                 {/* Main Image */}
-                                <div className="flex-1 relative bg-white rounded-lg aspect-square flex items-center justify-center overflow-hidden group">
+                                <div className="flex-1 relative bg-white rounded-lg aspect-square flex items-center justify-center overflow-hidden group animate-scale-in">
                                     <img
                                         src={allImages[selectedImage]}
                                         alt={productData.name}
@@ -109,7 +109,7 @@ const Version4: React.FC = () => {
                     </div>
 
                     {/* Right Side - Product Details */}
-                    <div className="lg:col-span-5">
+                    <div className="lg:col-span-5 animate-fade-in-up">
                         <div className="bg-white rounded-lg border border-gray-200 p-6 lg:p-8 sticky top-4">
 
                             {/* Category Badge */}
@@ -161,7 +161,7 @@ const Version4: React.FC = () => {
                             <div className="mb-6">
                                 <h3 className="text-sm font-semibold text-gray-900 mb-3">SIZE</h3>
                                 <div className="grid grid-cols-2 gap-3">
-                                    <button className="border-2 border-[#6B8E23] bg-[#f0f5e8] rounded-lg p-3 text-left">
+                                    <button className="border-2 border-[#567E73] bg-[#e8f2f0] rounded-lg p-3 text-left">
                                         <div className="text-xs text-gray-600 mb-1">Standard</div>
                                         <div className="font-semibold text-sm text-gray-900">31" Foil</div>
                                     </button>
@@ -207,7 +207,7 @@ const Version4: React.FC = () => {
                                 <button className="flex-1 bg-white border-2 border-gray-900 text-gray-900 py-3.5 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
                                     Add to Cart
                                 </button>
-                                <button className="flex-1 bg-[#6B8E23] text-white py-3.5 rounded-lg font-semibold hover:bg-[#5c7c1f] transition-colors shadow-lg">
+                                <button className="flex-1 bg-[#567E73] text-white py-3.5 rounded-lg font-semibold hover:bg-[#4a6d63] transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] transform">
                                     Buy It Now
                                 </button>
                             </div>
@@ -222,29 +222,29 @@ const Version4: React.FC = () => {
 
                             {/* Trust Badges */}
                             <div className="grid grid-cols-4 gap-3 pt-6 border-t border-gray-200">
-                                <div className="flex flex-col items-center text-center">
-                                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5">
+                                <div className="flex flex-col items-center text-center group">
+                                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-gray-200 transition-colors">
                                         <Package className="w-6 h-6 text-gray-700" />
                                     </div>
                                     <span className="text-[11px] font-semibold text-gray-900">No-Cost EMI</span>
                                     <span className="text-[11px] text-gray-500">Available</span>
                                 </div>
-                                <div className="flex flex-col items-center text-center">
-                                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5">
+                                <div className="flex flex-col items-center text-center group">
+                                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-gray-200 transition-colors">
                                         <Shield className="w-6 h-6 text-gray-700" />
                                     </div>
                                     <span className="text-[11px] font-semibold text-gray-900">Quality</span>
                                     <span className="text-[11px] text-gray-500">Guarantee</span>
                                 </div>
-                                <div className="flex flex-col items-center text-center">
-                                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5">
+                                <div className="flex flex-col items-center text-center group">
+                                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-gray-200 transition-colors">
                                         <Truck className="w-6 h-6 text-gray-700" />
                                     </div>
                                     <span className="text-[11px] font-semibold text-gray-900">Free Delivery</span>
                                     <span className="text-[11px] text-gray-500">On orders $30+</span>
                                 </div>
-                                <div className="flex flex-col items-center text-center">
-                                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5">
+                                <div className="flex flex-col items-center text-center group">
+                                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-gray-200 transition-colors">
                                         <RotateCcw className="w-6 h-6 text-gray-700" />
                                     </div>
                                     <span className="text-[11px] font-semibold text-gray-900">Easy Returns</span>
@@ -290,7 +290,7 @@ const Version4: React.FC = () => {
                         {productData.coordinated.map((item) => (
                             <div
                                 key={item.id}
-                                className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
+                                className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-all cursor-pointer group hover:-translate-y-1"
                             >
                                 <div className="aspect-square bg-gray-50 overflow-hidden">
                                     <img

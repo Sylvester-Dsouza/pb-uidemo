@@ -14,7 +14,7 @@ const Version5: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-instrument">
-      <div className="max-w-7xl mx-auto px-6 py-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2 text-xs font-semibold tracking-widest text-gray-400 uppercase">
             <span>Party</span>
@@ -53,7 +53,7 @@ const Version5: React.FC = () => {
               </div>
             </div>
 
-            <div className="hidden lg:flex gap-4">
+            <div className="hidden lg:flex gap-4 animate-slide-in-left">
               <div className="flex flex-col gap-3">
                 {productData.images.map((img, idx) => (
                   <button
@@ -66,7 +66,7 @@ const Version5: React.FC = () => {
                 ))}
               </div>
 
-              <div className="flex-1 bg-white rounded-2xl aspect-square flex items-center justify-center p-10 relative overflow-hidden border border-gray-200 shadow-sm">
+              <div className="flex-1 bg-white rounded-2xl aspect-square flex items-center justify-center p-10 relative overflow-hidden border border-gray-200 shadow-sm animate-scale-in">
                 <img src={activeImg} alt={productData.name} className="relative z-10 w-full h-full object-contain" />
                 <button
                   onClick={() => setLiked(!liked)}
@@ -78,7 +78,7 @@ const Version5: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 animate-slide-in-right">
             <div className="bg-white rounded-2xl border border-gray-200 p-6 lg:p-8 sticky top-4">
               <div className="mb-3 flex items-center justify-between">
                 <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">{productData.name}</h1>
@@ -96,7 +96,7 @@ const Version5: React.FC = () => {
                 <div className="flex items-center gap-3">
                   <span className="text-3xl font-bold">₹{productData.price.toFixed(2)}</span>
                   <span className="text-lg text-gray-400 line-through">₹{originalPrice}</span>
-                  <span className="px-2 py-1 rounded-full bg-black text-white text-xs font-bold">Limited stock</span>
+                  <span className="px-2 py-1 rounded-full bg-black text-white text-xs font-bold animate-pulse-soft">Limited stock</span>
                 </div>
                 <p className="mt-3 text-sm text-gray-600">{productData.description}</p>
               </div>
@@ -138,8 +138,8 @@ const Version5: React.FC = () => {
                   </div>
                 </div>
                 <div className="mt-4 flex gap-2">
-                  <button className="flex-1 rounded-full bg-black text-white py-3.5 font-semibold hover:bg-gray-900 transition-colors">Add to Cart</button>
-                  <button className="flex-[1.3] rounded-full border-2 border-black text-black py-4 font-semibold hover:bg-gray-50 transition-colors">Buy Now</button>
+                  <button className="flex-1 rounded-full bg-black text-white py-3.5 font-semibold hover:bg-gray-900 transition-all hover:scale-[1.02] transform">Add to Cart</button>
+                  <button className="flex-[1.3] rounded-full border-2 border-black text-black py-4 font-semibold hover:bg-gray-50 transition-all hover:scale-[1.02] transform">Buy Now</button>
                 </div>
               </div>
 
@@ -149,26 +149,26 @@ const Version5: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-4 gap-3 pt-4 border-t border-gray-200">
-                <div className="flex flex-col items-center text-center">
-                  <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5">
+                <div className="flex flex-col items-center text-center group">
+                  <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-gray-200 transition-colors">
                     <Package className="w-5 h-5 text-gray-700" />
                   </div>
                   <span className="text-[11px] font-semibold text-gray-900">Secure Pack</span>
                 </div>
-                <div className="flex flex-col items-center text-center">
-                  <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5">
+                <div className="flex flex-col items-center text-center group">
+                  <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-gray-200 transition-colors">
                     <ShieldCheck className="w-5 h-5 text-gray-700" />
                   </div>
                   <span className="text-[11px] font-semibold text-gray-900">Quality</span>
                 </div>
-                <div className="flex flex-col items-center text-center">
-                  <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5">
+                <div className="flex flex-col items-center text-center group">
+                  <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-gray-200 transition-colors">
                     <Truck className="w-5 h-5 text-gray-700" />
                   </div>
                   <span className="text-[11px] font-semibold text-gray-900">Fast Delivery</span>
                 </div>
-                <div className="flex flex-col items-center text-center">
-                  <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5">
+                <div className="flex flex-col items-center text-center group">
+                  <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-gray-200 transition-colors">
                     <Lock className="w-5 h-5 text-gray-700" />
                   </div>
                   <span className="text-[11px] font-semibold text-gray-900">Secure Pay</span>

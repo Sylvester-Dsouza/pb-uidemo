@@ -115,6 +115,94 @@
     .pb-safe {
       padding-bottom: env(safe-area-inset-bottom);
     }
+
+    /* Light animations for Version 2-5 */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* Animation classes */
+    .animate-fade-in-up {
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    .animate-slide-in-left {
+      animation: slideInLeft 0.5s ease-out forwards;
+    }
+
+    .animate-slide-in-right {
+      animation: slideInRight 0.5s ease-out forwards;
+    }
+
+    .animate-scale-in {
+      animation: scaleIn 0.4s ease-out forwards;
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .animate-pulse-soft {
+      animation: pulse-soft 2s ease-in-out infinite;
+    }
+
+    .animate-shimmer {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+
+    /* Staggered delays */
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+
+    /* Initial state for animated elements */
+    .animate-on-load {
+      opacity: 0;
+    }
   </style>
   <script type="importmap">
 {
