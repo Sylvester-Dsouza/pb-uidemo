@@ -15,7 +15,8 @@ const Version5: React.FC = () => {
   return (
     <div className="min-h-screen bg-white text-gray-900 font-instrument">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-        <div className="flex items-center justify-between mb-4">
+        {/* Breadcrumbs & Badges - Hidden on mobile */}
+        <div className="hidden sm:flex items-center justify-between mb-4">
           <div className="flex items-center gap-2 text-xs font-semibold tracking-widest text-gray-400 uppercase">
             <span>Party</span>
             <span>/</span>
@@ -32,24 +33,67 @@ const Version5: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           <div className="lg:col-span-7 lg:sticky lg:top-24 h-fit">
             
-            <div className="lg:hidden">
-              <div className="relative w-full aspect-square bg-white rounded-2xl flex items-center justify-center overflow-hidden border border-gray-200">
-                <img src={productData.images[mIndex]} alt={productData.name} className="w-full h-full object-contain p-6" />
-                {mIndex > 0 && (
-                  <button onClick={() => setMIndex(mIndex - 1)} className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white rounded-full shadow flex items-center justify-center">
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                )}
-                {mIndex < productData.images.length - 1 && (
-                  <button onClick={() => setMIndex(mIndex + 1)} className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white rounded-full shadow flex items-center justify-center">
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
-                )}
+            {/* Mobile Gallery - Polaroid Style with Swipe */}
+            <div className="lg:hidden relative pb-4">
+              {/* Main Polaroid Frame */}
+              <div className="relative mx-auto w-[90%] max-w-[320px]">
+                <div className="bg-white p-3 pb-12 rounded-lg shadow-[0_10px_40px_rgba(0,0,0,0.15)] rotate-[-2deg] transition-transform duration-500">
+                  <div className="aspect-square bg-gray-100 rounded overflow-hidden">
+                    <img 
+                      key={mIndex}
+                      src={productData.images[mIndex]} 
+                      alt={productData.name} 
+                      className="w-full h-full object-contain animate-fade-in" 
+                    />
+                  </div>
+                  {/* Polaroid Caption */}
+                  <div className="absolute bottom-3 left-0 right-0 text-center">
+                    <span className="font-handwriting text-gray-600 text-sm" style={{ fontFamily: 'cursive' }}>
+                      ✨ Perfect for parties!
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Like Button */}
+                <button
+                  onClick={() => setLiked(!liked)}
+                  className={`absolute -top-2 -right-2 z-20 p-3 rounded-full shadow-lg transition-all duration-300 ${
+                    liked ? 'bg-red-500 text-white scale-110' : 'bg-white text-gray-400'
+                  }`}
+                >
+                  <Heart className={`w-5 h-5 ${liked ? 'fill-white' : ''}`} />
+                </button>
+                
+                {/* Stacked effect behind */}
+                <div className="absolute inset-0 bg-white rounded-lg shadow-lg -z-10 rotate-[4deg] translate-x-2 translate-y-1 opacity-60" />
+                <div className="absolute inset-0 bg-white rounded-lg shadow-md -z-20 rotate-[8deg] translate-x-4 translate-y-2 opacity-30" />
               </div>
-              <div className="flex justify-center gap-2 mt-3">
-                {productData.images.map((_, i) => (
-                  <span key={i} className={`w-2 h-2 rounded-full ${i === mIndex ? 'bg-gray-900' : 'bg-gray-300'}`} />
-                ))}
+
+              {/* Dot Navigation with Swipe Hint */}
+              <div className="flex items-center justify-center gap-6 mt-8">
+                <button 
+                  onClick={() => setMIndex(Math.max(0, mIndex - 1))}
+                  className="p-2 text-gray-400 hover:text-gray-900 transition-colors"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <div className="flex gap-2">
+                  {productData.images.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setMIndex(i)}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        i === mIndex ? 'bg-gray-900 scale-125' : 'bg-gray-300 hover:bg-gray-400'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <button 
+                  onClick={() => setMIndex(Math.min(productData.images.length - 1, mIndex + 1))}
+                  className="p-2 text-gray-400 hover:text-gray-900 transition-colors"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
               </div>
             </div>
 
@@ -79,9 +123,9 @@ const Version5: React.FC = () => {
           </div>
 
           <div className="lg:col-span-5 animate-slide-in-right">
-            <div className="bg-white rounded-2xl border border-gray-200 p-6 lg:p-8 sticky top-4">
-              <div className="mb-3 flex items-center justify-between">
-                <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">{productData.name}</h1>
+            <div className="bg-white lg:rounded-2xl lg:border border-gray-200 p-0 lg:p-8 sticky top-4">
+              <div className="mb-3">
+                <h1 className="text-[26px] sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight mb-2">{productData.name}</h1>
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1">
                     {[...Array(5)].map((_, i) => (
@@ -92,13 +136,17 @@ const Version5: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mb-6">
-                <div className="flex items-center gap-3">
+              <div className="mb-5">
+                <div className="flex items-center gap-3 mb-2">
                   <span className="text-3xl font-bold">₹{productData.price.toFixed(2)}</span>
                   <span className="text-lg text-gray-400 line-through">₹{originalPrice}</span>
-                  <span className="px-2 py-1 rounded-full bg-black text-white text-xs font-bold animate-pulse-soft">Limited stock</span>
+                  <span className="px-2 py-1 rounded-full bg-green-600 text-white text-xs font-bold">Save {savings}%</span>
                 </div>
-                <p className="mt-3 text-sm text-gray-600">{productData.description}</p>
+                <div className="flex items-center gap-2 text-xs text-gray-600">
+                  <span className="flex items-center gap-1"><span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> In Stock</span>
+                  <span>•</span>
+                  <span>💵 Cash on Delivery Available</span>
+                </div>
               </div>
 
               
@@ -132,20 +180,40 @@ const Version5: React.FC = () => {
                       <Plus className="w-4 h-4" />
                     </button>
                   </div>
-                  <div className="flex-1 flex items-center justify-end gap-4">
-                    <div className="text-sm text-gray-700">Total: ₹{(productData.price * qty).toFixed(2)}</div>
-                    <span className="px-2 py-1 rounded-full border border-gray-200 text-xs text-gray-700">{variant}</span>
+                  <div className="flex-1 flex items-center justify-end">
+                    <div className="text-sm font-semibold text-gray-900">₹{(productData.price * qty).toFixed(2)}</div>
                   </div>
                 </div>
-                <div className="mt-4 flex gap-2">
-                  <button className="flex-1 rounded-full bg-black text-white py-3.5 font-semibold hover:bg-gray-900 transition-all hover:scale-[1.02] transform">Add to Cart</button>
-                  <button className="flex-[1.3] rounded-full border-2 border-black text-black py-4 font-semibold hover:bg-gray-50 transition-all hover:scale-[1.02] transform">Buy Now</button>
+                <div className="mt-4 flex flex-col gap-3">
+                  <button className="w-full rounded-full bg-black text-white py-4 font-bold text-base hover:bg-gray-900 transition-all hover:scale-[1.02] transform shadow-lg shadow-black/20 flex items-center justify-center gap-2">
+                    <span>Add to Cart</span>
+                    <span className="text-gray-400">•</span>
+                    <span>₹{(productData.price * qty).toFixed(2)}</span>
+                  </button>
+                  <button className="w-full rounded-full bg-white border-2 border-black text-black py-4 font-bold text-base hover:bg-gray-50 transition-all hover:scale-[1.02] transform animate-subtle-shake">
+                    Buy Now — Express Shipping
+                  </button>
+                  <style>{`
+                    @keyframes subtle-shake {
+                      0%, 90% { transform: translateX(0); }
+                      92% { transform: translateX(-3px); }
+                      94% { transform: translateX(3px); }
+                      96% { transform: translateX(-2px); }
+                      98% { transform: translateX(2px); }
+                      100% { transform: translateX(0); }
+                    }
+                    .animate-subtle-shake {
+                      animation: subtle-shake 3s ease-in-out infinite;
+                    }
+                  `}</style>
                 </div>
               </div>
 
-              <div className="mb-6 flex items-center gap-3 text-sm text-gray-600">
-                <Truck className="w-4 h-4" />
-                <span>Ships within 24 hours</span>
+              <div className="mb-5 p-3 bg-amber-50 border border-amber-200 rounded-xl">
+                <div className="flex items-center gap-2 text-sm">
+                  <span className="text-amber-600">🔥</span>
+                  <span className="text-amber-800 font-medium">12 people bought this in the last hour</span>
+                </div>
               </div>
 
               <div className="grid grid-cols-4 gap-3 pt-4 border-t border-gray-200">
@@ -190,13 +258,7 @@ const Version5: React.FC = () => {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 lg:hidden z-40">
-        <div className="flex items-center gap-3">
-          <span className="font-bold">₹{productData.price.toFixed(2)}</span>
-          <button className="flex-1 rounded-full bg-black text-white py-3 text-sm font-bold tracking-wide">Buy Now</button>
-        </div>
       </div>
-    </div>
   );
 };
 

@@ -13,8 +13,8 @@ const Version4: React.FC = () => {
     return (
         <div className="min-h-screen bg-white font-instrument">
 
-            {/* Breadcrumbs */}
-            <div className="bg-white border-b border-gray-200">
+            {/* Breadcrumbs - Hidden on mobile */}
+            <div className="hidden sm:block bg-white border-b border-gray-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
                     <div className="flex items-center gap-2 text-sm text-gray-500">
                         <span className="hover:text-gray-900 cursor-pointer">Home</span>
@@ -29,30 +29,52 @@ const Version4: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-1 pb-8 sm:py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
                     {/* Left Side - Image Gallery */}
                     <div className="lg:col-span-7 lg:sticky lg:top-24 h-fit">
-                        <div className="bg-white rounded-lg p-6">
+                        <div className="bg-white rounded-lg lg:p-6">
                             
-                            <div className="lg:hidden">
-                                <div className="relative w-full aspect-square bg-white rounded-lg flex items-center justify-center overflow-hidden border border-gray-200">
-                                    <img src={allImages[selectedImage]} alt={productData.name} className="max-w-full max-h-full object-contain p-8" />
-                                    {selectedImage > 0 && (
-                                        <button onClick={() => setSelectedImage(selectedImage - 1)} className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white rounded-full shadow flex items-center justify-center">
-                                            <ChevronLeft className="w-5 h-5" />
-                                        </button>
-                                    )}
-                                    {selectedImage < allImages.length - 1 && (
-                                        <button onClick={() => setSelectedImage(selectedImage + 1)} className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white rounded-full shadow flex items-center justify-center">
-                                            <ChevronRight className="w-5 h-5" />
-                                        </button>
-                                    )}
+                            {/* Mobile Gallery - Split View with Mini Grid */}
+                            <div className="lg:hidden -mt-1">
+                                {/* Main Image */}
+                                <div className="relative aspect-square overflow-hidden mb-2">
+                                    <img 
+                                        key={selectedImage}
+                                        src={allImages[selectedImage]} 
+                                        alt={productData.name} 
+                                        className="w-full h-full object-contain p-4 animate-fade-in" 
+                                    />
+                                    
+                                    {/* Floating Badge */}
+                                    <div className="absolute top-2 left-2 bg-[#567E73] text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                                        {discount}% OFF
+                                    </div>
+                                    
+                                    {/* Image Counter */}
+                                    <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white px-2.5 py-1 rounded-full text-[10px] font-medium">
+                                        {selectedImage + 1} / {allImages.length}
+                                    </div>
                                 </div>
-                                <div className="flex justify-center gap-2 mt-3">
-                                    {allImages.map((_, i) => (
-                                        <span key={i} className={`w-2 h-2 rounded-full ${i === selectedImage ? 'bg-gray-900' : 'bg-gray-300'}`} />
+                                
+                                {/* Mini Grid Thumbnails */}
+                                <div className="grid grid-cols-4 gap-2 px-1">
+                                    {allImages.map((img, i) => (
+                                        <button
+                                            key={i}
+                                            onClick={() => setSelectedImage(i)}
+                                            className={`relative aspect-square rounded-lg overflow-hidden transition-all duration-200 ${
+                                                i === selectedImage 
+                                                    ? 'ring-2 ring-[#567E73] ring-offset-1' 
+                                                    : 'opacity-60 hover:opacity-100'
+                                            }`}
+                                        >
+                                            <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-cover" />
+                                            {i === selectedImage && (
+                                                <div className="absolute inset-0 bg-[#567E73]/10" />
+                                            )}
+                                        </button>
                                     ))}
                                 </div>
                             </div>
@@ -110,7 +132,7 @@ const Version4: React.FC = () => {
 
                     {/* Right Side - Product Details */}
                     <div className="lg:col-span-5 animate-fade-in-up">
-                        <div className="bg-white rounded-lg border border-gray-200 p-6 lg:p-8 sticky top-4">
+                        <div className="bg-white lg:rounded-lg lg:border border-gray-200 p-0 lg:p-8 sticky top-4">
 
                             {/* Category Badge */}
                             <div className="inline-block bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-xs font-semibold mb-4">
@@ -118,7 +140,7 @@ const Version4: React.FC = () => {
                             </div>
 
                             {/* Product Title */}
-                            <h1 className="text-3xl lg:text-4xl font-semibold text-gray-900 mb-3">
+                            <h1 className="text-[26px] sm:text-3xl lg:text-4xl font-semibold text-gray-900 mb-3">
                                 {productData.name}
                             </h1>
 
@@ -208,7 +230,7 @@ const Version4: React.FC = () => {
                                     Add to Cart
                                 </button>
                                 <button className="flex-1 bg-[#567E73] text-white py-3.5 rounded-lg font-semibold hover:bg-[#4a6d63] transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] transform">
-                                    Buy It Now
+                                    Buy Now
                                 </button>
                             </div>
 
@@ -240,8 +262,8 @@ const Version4: React.FC = () => {
                                     <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-gray-200 transition-colors">
                                         <Truck className="w-6 h-6 text-gray-700" />
                                     </div>
-                                    <span className="text-[11px] font-semibold text-gray-900">Free Delivery</span>
-                                    <span className="text-[11px] text-gray-500">On orders $30+</span>
+                                    <span className="text-[11px] font-semibold text-gray-900">Cash on Delivery</span>
+                                    <span className="text-[11px] text-gray-500">Pay when received</span>
                                 </div>
                                 <div className="flex flex-col items-center text-center group">
                                     <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-gray-200 transition-colors">

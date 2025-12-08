@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Star, ArrowRight, Heart, Minus, Plus, ShieldCheck, Sparkles, Wind, Package, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react';
 import { productData } from '../data';
 
@@ -8,7 +8,29 @@ const Version2: React.FC = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [openSection, setOpenSection] = useState<'details' | 'specs' | 'shipping' | 'reviews' | null>('details');
   const [mIndex, setMIndex] = useState(0);
-
+  
+  // Swipe handling
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+  
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && mIndex < productData.images.length - 1) {
+        setMIndex(mIndex + 1);
+      } else if (diff < 0 && mIndex > 0) {
+        setMIndex(mIndex - 1);
+      }
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-rose-50/30 text-slate-900 font-instrument pb-20">
 
@@ -18,10 +40,10 @@ const Version2: React.FC = () => {
         <div className="absolute bottom-[10%] left-[5%] w-[500px] h-[500px] bg-amber-200/15 rounded-full blur-[120px] animate-pulse-soft" style={{animationDelay: '1s'}}></div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 py-8 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6 pt-1 pb-0 sm:py-8 lg:py-20">
 
-        {/* Breadcrumbs */}
-        <div className="flex items-center gap-2 text-xs font-medium tracking-wider text-slate-400 uppercase mb-10">
+        {/* Breadcrumbs - Hidden on mobile */}
+        <div className="hidden sm:flex items-center gap-2 text-xs font-medium tracking-wider text-slate-400 uppercase mb-10">
           <span className="hover:text-slate-700 cursor-pointer transition-colors">Home</span>
           <span className="text-slate-300">/</span>
           <span className="hover:text-slate-700 cursor-pointer transition-colors">Party Collection</span>
@@ -29,31 +51,91 @@ const Version2: React.FC = () => {
           <span className="text-slate-700">Licensed Characters</span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-24 items-start">
 
           {/* LEFT: Image Gallery */}
-          <div className="flex flex-col gap-6 lg:sticky lg:top-24 h-fit">
+          <div className="flex flex-col gap-4 lg:gap-6 lg:sticky lg:top-24 h-fit">
 
             
-            <div className="lg:hidden">
-              <div className="relative w-full aspect-square bg-white rounded-2xl flex items-center justify-center overflow-hidden border border-slate-100">
-                <img src={productData.images[mIndex]} alt={productData.name} className="w-full h-full object-contain p-6" />
+            {/* Mobile Gallery - Flip Card Carousel */}
+            <div className="lg:hidden relative -mx-4 sm:mx-0 -mt-1">
+              {/* Main Image Container */}
+              <div 
+                className="relative aspect-square overflow-hidden sm:rounded-2xl bg-gradient-to-br from-rose-50/50 via-white to-slate-50"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                {/* Like Button */}
+                <button
+                  onClick={() => setIsLiked(!isLiked)}
+                  className={`absolute top-2 right-2 z-20 p-2.5 rounded-full shadow-lg transition-all duration-300 ${isLiked ? 'bg-rose-500 text-white scale-110' : 'bg-white text-gray-400'}`}
+                >
+                  <Heart className={`w-5 h-5 transition-all ${isLiked ? 'fill-white' : ''}`} />
+                </button>
+
+                {/* Image Counter */}
+                <div className="absolute top-2 left-2 z-20 bg-black/60 backdrop-blur-sm text-white px-2.5 py-1 rounded-full text-[10px] font-medium">
+                  {mIndex + 1} / {productData.images.length}
+                </div>
+
+                {/* Animated Image */}
+                <div 
+                  key={mIndex}
+                  className="absolute inset-0 flex items-center justify-center p-4"
+                  style={{
+                    animation: 'flipIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+                  }}
+                >
+                  <img 
+                    src={productData.images[mIndex]} 
+                    alt={productData.name} 
+                    className="w-full h-full object-contain" 
+                  />
+                </div>
+                
+                {/* Touch Areas for Navigation */}
+                <button 
+                  onClick={() => setMIndex(Math.max(0, mIndex - 1))}
+                  className="absolute left-0 top-0 bottom-0 w-1/4 z-10"
+                  aria-label="Previous"
+                />
+                <button 
+                  onClick={() => setMIndex(Math.min(productData.images.length - 1, mIndex + 1))}
+                  className="absolute right-0 top-0 bottom-0 w-1/4 z-10"
+                  aria-label="Next"
+                />
+                
+                {/* Side Indicators */}
                 {mIndex > 0 && (
-                  <button onClick={() => setMIndex(mIndex - 1)} className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white rounded-full shadow flex items-center justify-center">
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
+                  <div className="absolute left-2 top-1/2 -translate-y-1/2 w-1 h-10 bg-slate-900/20 rounded-full" />
                 )}
                 {mIndex < productData.images.length - 1 && (
-                  <button onClick={() => setMIndex(mIndex + 1)} className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 bg-white rounded-full shadow flex items-center justify-center">
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
+                  <div className="absolute right-2 top-1/2 -translate-y-1/2 w-1 h-10 bg-slate-900/20 rounded-full" />
                 )}
               </div>
+              
+              {/* Minimal Dots */}
               <div className="flex justify-center gap-2 mt-3">
                 {productData.images.map((_, i) => (
-                  <span key={i} className={`w-2 h-2 rounded-full ${i === mIndex ? 'bg-slate-900' : 'bg-slate-300'}`} />
+                  <button 
+                    key={i} 
+                    onClick={() => setMIndex(i)}
+                    className={`rounded-full transition-all duration-300 ${
+                      i === mIndex 
+                        ? 'w-6 h-2 bg-slate-900' 
+                        : 'w-2 h-2 bg-slate-300 hover:bg-slate-500'
+                    }`} 
+                  />
                 ))}
               </div>
+              
+              <style>{`
+                @keyframes flipIn {
+                  0% { opacity: 0; transform: scale(0.9) rotateY(-10deg); }
+                  100% { opacity: 1; transform: scale(1) rotateY(0); }
+                }
+              `}</style>
             </div>
 
             
@@ -106,38 +188,40 @@ const Version2: React.FC = () => {
             
 
             {/* Product Title */}
-            <h1 className="font-instrument text-2xl lg:text-3xl font-bold text-slate-900 leading-[1.2] mb-6 tracking-tight">
+            <h1 className="font-instrument text-[26px] sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-[1.2] mb-3 sm:mb-6 tracking-tight">
               {productData.name}
             </h1>
 
             {/* Description */}
-            <p className="text-lg text-slate-600 leading-relaxed font-light mb-8">
-              Create magical moments that last forever. Crafted from premium Italian foil, this balloon brings the beloved Masha character to life, serving as the perfect centerpiece for unforgettable celebrations.
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-light mb-6">
+              Create magical moments that last forever. Premium Italian foil balloon, perfect for unforgettable celebrations.
             </p>
 
             {/* Price Section */}
-            <div className="bg-gradient-to-br from-slate-50 to-white p-8 rounded-2xl shadow-sm border border-slate-100 mb-8">
-              <div className="flex justify-between items-start mb-6">
-                <div>
-                  <span className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Price</span>
-                  <div className="flex items-baseline gap-3">
-                    <span className="font-instrument text-5xl text-slate-900">₹{productData.price}</span>
-                    <span className="text-xl text-slate-300 line-through font-light">₹18.00</span>
-                  </div>
+            <div className="bg-gradient-to-br from-slate-50 to-white p-4 sm:p-8 rounded-2xl shadow-sm border border-slate-100 mb-6">
+              {/* Price */}
+              <div className="mb-4">
+                <span className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Price</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-instrument text-3xl sm:text-4xl text-slate-900">₹{productData.price}</span>
+                  <span className="text-base text-slate-300 line-through font-light">₹18.00</span>
                 </div>
+              </div>
 
-                {/* Quantity Stepper */}
+              {/* Quantity Stepper - Own Row */}
+              <div className="flex items-center justify-between mb-4 pb-4 border-b border-slate-100">
+                <span className="text-sm font-medium text-slate-600">Quantity</span>
                 <div className="flex items-center bg-white rounded-full px-1 py-1 shadow-sm border border-slate-200">
                   <button
                     onClick={() => setQty(Math.max(1, qty - 1))}
-                    className="w-9 h-9 rounded-full bg-slate-50 hover:bg-slate-100 flex items-center justify-center text-slate-600 transition-colors"
+                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-50 hover:bg-slate-100 flex items-center justify-center text-slate-600 transition-colors"
                   >
                     <Minus className="w-4 h-4" />
                   </button>
-                  <span className="w-12 text-center font-semibold text-lg">{qty}</span>
+                  <span className="w-10 sm:w-12 text-center font-semibold text-base">{qty}</span>
                   <button
                     onClick={() => setQty(qty + 1)}
-                    className="w-9 h-9 rounded-full bg-slate-900 hover:bg-slate-800 text-white flex items-center justify-center transition-colors"
+                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-900 hover:bg-slate-800 text-white flex items-center justify-center transition-colors"
                   >
                     <Plus className="w-4 h-4" />
                   </button>
@@ -145,13 +229,14 @@ const Version2: React.FC = () => {
               </div>
 
               {/* Add to Cart Button */}
-              <button className="w-full bg-slate-900 text-white font-semibold text-base py-4 rounded-full shadow-lg shadow-slate-900/20 hover:shadow-xl hover:bg-slate-800 transition-all transform hover:-translate-y-1 hover:scale-[1.02] flex items-center justify-center gap-3 group">
+              <button className="w-full bg-slate-900 text-white font-semibold text-sm sm:text-base py-3.5 sm:py-4 rounded-full shadow-lg shadow-slate-900/20 hover:shadow-xl hover:bg-slate-800 transition-all transform hover:-translate-y-1 hover:scale-[1.02] flex items-center justify-center gap-2 group">
                 <span>Add to Basket</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <span className="text-slate-400">•</span>
+                <span>₹{(productData.price * qty).toFixed(2)}</span>
               </button>
 
               {/* Stock Status */}
-              <div className="mt-4 flex items-center justify-center gap-2">
+              <div className="mt-3 flex items-center justify-center gap-2">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                 <span className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">
                   In Stock - Ships Tomorrow
@@ -286,7 +371,8 @@ const Version2: React.FC = () => {
 
         
       </div>
-    </div>
+
+      </div>
   );
 };
 

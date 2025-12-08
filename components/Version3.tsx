@@ -10,23 +10,22 @@ const Version3: React.FC = () => {
    const originalPrice = (productData.price * 1.25).toFixed(2);
    const savings = (parseFloat(originalPrice) - productData.price).toFixed(2);
    const [selectedSize, setSelectedSize] = useState<'standard' | 'jumbo'>('standard');
-
    return (
       <div className="min-h-screen bg-white text-gray-900 font-instrument">
          
          {/* Urgency Banner */}
-         <div className="bg-[#567E73] text-white py-2.5 px-4 text-center">
-            <p className="text-sm font-medium flex items-center justify-center gap-2">
-               <Zap className="w-4 h-4" />
-               <span><strong>Flash Sale!</strong> 20% off ends in 2:47:33 — Don't miss out!</span>
-               <Zap className="w-4 h-4" />
+         <div className="bg-[#567E73] text-white py-2 px-3 text-center">
+            <p className="text-xs sm:text-sm font-medium flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap">
+               <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+               <span><strong>Flash Sale!</strong> 20% off ends in 2:47:33</span>
+               <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 hidden sm:block" />
             </p>
          </div>
 
-         <div className="max-w-7xl mx-auto px-3 sm:px-6 py-6 lg:py-10">
+         <div className="max-w-7xl mx-auto px-3 sm:px-6 pt-1 pb-6 sm:py-6 lg:py-10">
 
-            {/* Breadcrumbs */}
-            <div className="mb-6 animate-fade-in">
+            {/* Breadcrumbs - Hidden on mobile */}
+            <div className="hidden sm:block mb-6 animate-fade-in">
                <div className="flex items-center gap-2 text-xs text-gray-500">
                   <span className="hover:text-gray-900 cursor-pointer transition-colors">Home</span>
                   <span>/</span>
@@ -41,42 +40,54 @@ const Version3: React.FC = () => {
                {/* Left: Gallery */}
                <div className="lg:col-span-7 lg:sticky lg:top-24 h-fit animate-slide-in-left">
                   
-                  {/* Mobile Gallery */}
-                  <div className="lg:hidden">
-                     <div className="relative w-full aspect-square bg-white rounded-3xl flex items-center justify-center overflow-hidden border border-gray-100">
+                  {/* Mobile Gallery - Full Screen Hero with Thumbnails */}
+                  <div className="lg:hidden relative -mt-1">
+                     {/* Main Hero Image */}
+                     <div className="relative aspect-square bg-gradient-to-b from-[#567E73]/5 to-white rounded-2xl overflow-hidden">
                         {/* Sale Badge */}
-                        <div className="absolute top-4 left-4 z-20 bg-[#567E73] text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                        <div className="absolute top-2 left-2 z-20 bg-[#567E73] text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
+                           <Sparkles className="w-3 h-3" />
                            SAVE ₹{savings}
                         </div>
-                        
-                        <img src={productData.images[mIndex]} alt={productData.name} className="w-full h-full object-contain p-4 transition-transform duration-500" />
                         
                         {/* Like Button */}
                         <button
                            onClick={() => setIsLiked(!isLiked)}
-                           className={`absolute top-4 right-4 z-20 p-3 rounded-full shadow-lg transition-all duration-300 ${isLiked ? 'bg-[#567E73] text-white' : 'bg-white/90 backdrop-blur-sm text-gray-400'}`}
+                           className={`absolute top-2 right-2 z-20 p-2.5 rounded-full shadow-lg transition-all duration-300 ${isLiked ? 'bg-[#567E73] text-white scale-110' : 'bg-white text-gray-400'}`}
                         >
                            <Heart className={`w-5 h-5 transition-all ${isLiked ? 'fill-white' : ''}`} />
                         </button>
 
-                        {mIndex > 0 && (
-                           <button onClick={() => setMIndex(mIndex - 1)} className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white transition-colors">
-                              <ChevronLeft className="w-5 h-5" />
-                           </button>
-                        )}
-                        {mIndex < productData.images.length - 1 && (
-                           <button onClick={() => setMIndex(mIndex + 1)} className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white transition-colors">
-                              <ChevronRight className="w-5 h-5" />
-                           </button>
-                        )}
-                     </div>
-                     <div className="flex justify-center gap-2 mt-4">
-                        {productData.images.map((_, i) => (
-                           <button 
-                              key={i} 
-                              onClick={() => setMIndex(i)}
-                              className={`w-2.5 h-2.5 rounded-full transition-all ${i === mIndex ? 'bg-[#567E73] w-6' : 'bg-gray-300 hover:bg-gray-400'}`} 
+                        {/* Main Image with Animation */}
+                        <div className="absolute inset-0 flex items-center justify-center p-4">
+                           <img 
+                              key={mIndex}
+                              src={productData.images[mIndex]} 
+                              alt={productData.name} 
+                              className="w-full h-full object-contain animate-scale-in" 
                            />
+                        </div>
+
+                        {/* Image Counter */}
+                        <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white px-2.5 py-1 rounded-full text-[10px] font-medium">
+                           {mIndex + 1} / {productData.images.length}
+                        </div>
+                     </div>
+
+                     {/* Thumbnail Strip */}
+                     <div className="flex gap-2 mt-3 overflow-x-auto pb-2 scrollbar-hide" style={{ scrollbarWidth: 'none' }}>
+                        {productData.images.map((img, i) => (
+                           <button
+                              key={i}
+                              onClick={() => setMIndex(i)}
+                              className={`flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden transition-all duration-300 ${
+                                 i === mIndex 
+                                    ? 'ring-2 ring-[#567E73] ring-offset-1 scale-105' 
+                                    : 'opacity-50 hover:opacity-80'
+                              }`}
+                           >
+                              <img src={img} alt={`Thumb ${i + 1}`} className="w-full h-full object-cover" />
+                           </button>
                         ))}
                      </div>
                   </div>
@@ -145,7 +156,7 @@ const Version3: React.FC = () => {
 
                {/* Right: Product Details */}
                <div className="lg:col-span-5 animate-slide-in-right">
-                  <div className="lg:sticky lg:top-6 bg-gray-50/70 rounded-3xl p-6 lg:p-8">
+                  <div className="lg:sticky lg:top-6 bg-gray-50/70 lg:rounded-3xl lg:p-8">
                      
                      {/* Trust Badge */}
                      <div className="flex items-center gap-2 mb-4">
@@ -160,7 +171,7 @@ const Version3: React.FC = () => {
                      </div>
 
                      {/* Product Title */}
-                     <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-3">
+                     <h1 className="text-[26px] sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-3">
                         {productData.name}
                      </h1>
 
@@ -241,71 +252,80 @@ const Version3: React.FC = () => {
                            </div>
                         </div>
 
-                        <button className="w-full bg-[#567E73] text-white py-4 rounded-full font-bold text-lg shadow-xl shadow-[#567E73]/30 hover:shadow-2xl hover:shadow-[#567E73]/40 hover:bg-[#4a6d63] transition-all duration-300 hover:scale-[1.02] transform flex items-center justify-center gap-2 mb-3">
+                        <button className="w-full bg-[#567E73] text-white py-4 rounded-full font-bold text-base shadow-xl shadow-[#567E73]/30 hover:shadow-2xl hover:shadow-[#567E73]/40 hover:bg-[#4a6d63] transition-all duration-300 hover:scale-[1.02] transform flex items-center justify-center gap-2 mb-3">
                            <Gift className="w-5 h-5" />
-                           Add to Cart — Make It Special!
+                           Add to Cart
                         </button>
 
-                        <button className="w-full bg-gray-900 text-white py-3.5 rounded-full font-semibold hover:bg-gray-800 transition-all">
-                           Buy Now — Instant Checkout
+                        <button className="w-full bg-gray-900 text-white py-4 rounded-full font-bold text-base hover:bg-gray-800 transition-all animate-subtle-pulse">
+                           Buy Now — Express Shipping
                         </button>
+                        <style>{`
+                          @keyframes subtle-pulse {
+                            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(17, 24, 39, 0.4); }
+                            50% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(17, 24, 39, 0); }
+                          }
+                          .animate-subtle-pulse {
+                            animation: subtle-pulse 2s ease-in-out infinite;
+                          }
+                        `}</style>
                      </div>
 
                      {/* Trust Indicators */}
-                     <div className="grid grid-cols-2 gap-3 mb-6">
-                        <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
-                           <div className="w-10 h-10 bg-[#567E73]/10 rounded-full flex items-center justify-center">
-                              <Truck className="w-5 h-5 text-[#567E73]" />
+                     <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-6">
+                        <div className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
+                           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#567E73]/10 rounded-full flex items-center justify-center flex-shrink-0">
+                              <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-[#567E73]" />
                            </div>
-                           <div>
-                              <p className="text-sm font-semibold text-gray-900">Free Delivery</p>
-                              <p className="text-xs text-gray-500">Orders over ₹499</p>
-                           </div>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
-                           <div className="w-10 h-10 bg-[#6B9389]/20 rounded-full flex items-center justify-center">
-                              <ShieldCheck className="w-5 h-5 text-[#567E73]" />
-                           </div>
-                           <div>
-                              <p className="text-sm font-semibold text-gray-900">Quality Promise</p>
-                              <p className="text-xs text-gray-500">100% satisfaction</p>
+                           <div className="min-w-0">
+                              <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">Cash on Delivery</p>
+                              <p className="text-[10px] sm:text-xs text-gray-500">Pay when you receive</p>
                            </div>
                         </div>
-                        <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
-                           <div className="w-10 h-10 bg-[#7BA89D]/20 rounded-full flex items-center justify-center">
-                              <Package className="w-5 h-5 text-[#567E73]" />
+                        <div className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
+                           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#6B9389]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-[#567E73]" />
                            </div>
-                           <div>
-                              <p className="text-sm font-semibold text-gray-900">Ships Tomorrow</p>
-                              <p className="text-xs text-gray-500">Order within 4h 23m</p>
+                           <div className="min-w-0">
+                              <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">Quality Promise</p>
+                              <p className="text-[10px] sm:text-xs text-gray-500">100% satisfaction</p>
                            </div>
                         </div>
-                        <div className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
-                           <div className="w-10 h-10 bg-[#567E73]/15 rounded-full flex items-center justify-center">
-                              <Gift className="w-5 h-5 text-[#567E73]" />
+                        <div className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
+                           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#7BA89D]/20 rounded-full flex items-center justify-center flex-shrink-0">
+                              <Package className="w-4 h-4 sm:w-5 sm:h-5 text-[#567E73]" />
                            </div>
-                           <div>
-                              <p className="text-sm font-semibold text-gray-900">Gift Ready</p>
-                              <p className="text-xs text-gray-500">Beautiful packaging</p>
+                           <div className="min-w-0">
+                              <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">Ships Tomorrow</p>
+                              <p className="text-[10px] sm:text-xs text-gray-500">Order in 4h 23m</p>
+                           </div>
+                        </div>
+                        <div className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
+                           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#567E73]/15 rounded-full flex items-center justify-center flex-shrink-0">
+                              <Gift className="w-4 h-4 sm:w-5 sm:h-5 text-[#567E73]" />
+                           </div>
+                           <div className="min-w-0">
+                              <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">Gift Ready</p>
+                              <p className="text-[10px] sm:text-xs text-gray-500">Beautiful packaging</p>
                            </div>
                         </div>
                      </div>
 
                      {/* Customer Review Highlight */}
-                     <div className="bg-[#567E73]/5 rounded-2xl p-5 border border-[#567E73]/10">
-                        <div className="flex items-start gap-3">
-                           <div className="w-12 h-12 rounded-full bg-[#567E73] flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                     <div className="bg-[#567E73]/5 rounded-2xl p-3 sm:p-5 border border-[#567E73]/10">
+                        <div className="flex items-start gap-2.5 sm:gap-3">
+                           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#567E73] flex items-center justify-center text-white font-bold text-sm sm:text-lg flex-shrink-0">
                               P
                            </div>
-                           <div>
-                              <div className="flex items-center gap-2 mb-1">
-                                 <span className="font-semibold text-gray-900">Priya M.</span>
+                           <div className="min-w-0 flex-1">
+                              <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-1">
+                                 <span className="text-sm sm:text-base font-semibold text-gray-900">Priya M.</span>
                                  <div className="flex items-center gap-0.5">
-                                    {[1,2,3,4,5].map(i => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
+                                    {[1,2,3,4,5].map(i => <Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />)}
                                  </div>
-                                 <span className="text-xs text-[#567E73] font-medium">Verified Purchase</span>
+                                 <span className="text-[10px] sm:text-xs text-[#567E73] font-medium">Verified Purchase</span>
                               </div>
-                              <p className="text-sm text-gray-700 leading-relaxed">
+                              <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                                  "My daughter's face when she saw this balloon was priceless! 😍 The quality is amazing and it stayed inflated for days. Already ordered more for her friend's party!"
                               </p>
                            </div>
@@ -360,20 +380,7 @@ const Version3: React.FC = () => {
             </div>
          </div>
 
-         {/* Sticky Mobile Bar */}
-         <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 p-4 lg:hidden z-40 pb-safe shadow-2xl">
-            <div className="flex items-center gap-3">
-               <div className="flex-shrink-0">
-                  <p className="text-xs text-gray-500 line-through">₹{originalPrice}</p>
-                  <p className="text-xl font-bold text-gray-900">₹{productData.price}</p>
-               </div>
-               <button className="flex-1 bg-[#567E73] text-white py-3.5 text-sm font-bold tracking-wide rounded-full shadow-lg shadow-[#567E73]/30 hover:bg-[#4a6d63] flex items-center justify-center gap-2">
-                  <Gift className="w-4 h-4" />
-                  Add to Cart
-               </button>
-            </div>
          </div>
-      </div>
    );
 };
 
