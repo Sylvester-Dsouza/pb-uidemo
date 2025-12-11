@@ -48,7 +48,7 @@ const Version4: React.FC = () => {
                                     />
                                     
                                     {/* Floating Badge */}
-                                    <div className="absolute top-2 left-2 bg-[#567E73] text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                                    <div className="absolute top-2 left-2 bg-[#E8B4A0] text-gray-900 px-3 py-1.5 rounded-full text-xs font-bold">
                                         {discount}% OFF
                                     </div>
                                     
@@ -66,13 +66,13 @@ const Version4: React.FC = () => {
                                             onClick={() => setSelectedImage(i)}
                                             className={`relative aspect-square rounded-lg overflow-hidden transition-all duration-200 ${
                                                 i === selectedImage 
-                                                    ? 'ring-2 ring-[#567E73] ring-offset-1' 
+                                                    ? 'ring-2 ring-[#D4A574] ring-offset-1' 
                                                     : 'opacity-60 hover:opacity-100'
                                             }`}
                                         >
                                             <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-cover" />
                                             {i === selectedImage && (
-                                                <div className="absolute inset-0 bg-[#567E73]/10" />
+                                                <div className="absolute inset-0 bg-[#E8B4A0]/10" />
                                             )}
                                         </button>
                                     ))}
@@ -87,7 +87,7 @@ const Version4: React.FC = () => {
                                             key={idx}
                                             onClick={() => setSelectedImage(idx)}
                                             className={`w-20 h-20 rounded-md border-2 overflow-hidden transition-all ${selectedImage === idx
-                                                ? 'border-amber-500 shadow-md'
+                                                ? 'border-[#D4A574] shadow-md'
                                                 : 'border-gray-200 hover:border-gray-300'
                                                 }`}
                                         >
@@ -132,7 +132,7 @@ const Version4: React.FC = () => {
 
                     {/* Right Side - Product Details */}
                     <div className="lg:col-span-5 animate-fade-in-up">
-                        <div className="bg-white lg:rounded-lg lg:border border-gray-200 p-0 lg:p-8 sticky top-4">
+                        <div className="bg-[#FAF5EF] lg:rounded-lg lg:border border-[#E8B4A0]/40 p-0 lg:p-8 sticky top-4">
 
                             {/* Category Badge */}
                             <div className="inline-block bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-xs font-semibold mb-4">
@@ -183,7 +183,7 @@ const Version4: React.FC = () => {
                             <div className="mb-6">
                                 <h3 className="text-sm font-semibold text-gray-900 mb-3">SIZE</h3>
                                 <div className="grid grid-cols-2 gap-3">
-                                    <button className="border-2 border-[#567E73] bg-[#e8f2f0] rounded-lg p-3 text-left">
+                                    <button className="border-2 border-[#D4A574] bg-[#FFF8DC] rounded-lg p-3 text-left">
                                         <div className="text-xs text-gray-600 mb-1">Standard</div>
                                         <div className="font-semibold text-sm text-gray-900">31" Foil</div>
                                     </button>
@@ -229,7 +229,7 @@ const Version4: React.FC = () => {
                                 <button className="flex-1 bg-white border-2 border-gray-900 text-gray-900 py-3.5 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
                                     Add to Cart
                                 </button>
-                                <button className="flex-1 bg-[#567E73] text-white py-3.5 rounded-lg font-semibold hover:bg-[#4a6d63] transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] transform">
+                                <button className="flex-1 bg-[#E8B4A0] text-gray-900 py-3.5 rounded-lg font-semibold hover:bg-[#D4A574] transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] transform">
                                     Buy Now
                                 </button>
                             </div>
@@ -301,33 +301,22 @@ const Version4: React.FC = () => {
                                     ))}
                                 </div>
                             </div>
+
+                            {/* Coordinated Products */}
+                            <div className="mt-6 pt-6 border-t border-gray-200">
+                                <h3 className="text-sm font-semibold text-gray-900 mb-4">COORDINATED</h3>
+                                <div className="grid grid-cols-4 gap-3">
+                                    {productData.coordinated.slice(0, 8).map(prod => (
+                                        <div key={prod.id} className="w-full aspect-square rounded-full border-[3px] border-[#D4A574] bg-white overflow-hidden hover:scale-105 transition-transform cursor-pointer p-3">
+                                            <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* You Might Also Like Section */}
-                <div className="mt-12">
-                    <h2 className="text-2xl font-semibold text-gray-900 mb-6">You Might Also Like</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-                        {productData.coordinated.map((item) => (
-                            <div
-                                key={item.id}
-                                className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-all cursor-pointer group hover:-translate-y-1"
-                            >
-                                <div className="aspect-square bg-gray-50 overflow-hidden">
-                                    <img
-                                        src={item.image}
-                                        alt={item.name}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                    />
-                                </div>
-                                <div className="p-3">
-                                    <p className="text-xs font-medium text-gray-900 truncate">{item.name}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
             </div>
         </div>
     );

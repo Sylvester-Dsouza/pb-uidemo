@@ -22,12 +22,13 @@ export const productData: ProductData = {
   ],
   tags: ['#Boy', '#Girl'],
   coordinated: [
-    { id: '1', name: 'Rainbow Balloons', image: 'https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?auto=format&fit=crop&q=80&w=400' },
-    { id: '2', name: 'Gold Confetti', image: 'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&q=80&w=400' },
-    { id: '3', name: 'Pink Heart Foil', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&q=80&w=400' },
-    { id: '4', name: 'Number Balloons', image: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&q=80&w=400' },
-    { id: '5', name: 'Party Balloons', image: 'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&q=80&w=400' },
-    { id: '6', name: 'Pastel Mix', image: 'https://images.unsplash.com/photo-1481162854517-d9e353af153d?auto=format&fit=crop&q=80&w=400' },
-    { id: '7', name: 'Metallic Balloons', image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=400' },
+    { id: '1', name: 'Coordinated 1', image: '/Cordinated-images/c1.jpg' },
+    { id: '2', name: 'Coordinated 2', image: '/Cordinated-images/c2.jpg' },
+    { id: '3', name: 'Coordinated 3', image: '/Cordinated-images/c3.jpg' },
+    { id: '4', name: 'Coordinated 4', image: '/Cordinated-images/c4.jpg' },
+    { id: '5', name: 'Coordinated 5', image: '/Cordinated-images/c5.jpg' },
+    { id: '6', name: 'Coordinated 6', image: '/Cordinated-images/c6.jpg' },
+    { id: '7', name: 'Coordinated 7', image: '/Cordinated-images/c7.jpg' },
+    { id: '8', name: 'Coordinated 8', image: '/Cordinated-images/c8.jpg' },
   ]
 };

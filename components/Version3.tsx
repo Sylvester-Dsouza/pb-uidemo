@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Star, Heart, Minus, Plus, ChevronLeft, ChevronRight, Truck, ShieldCheck, Gift, Clock, Sparkles, Check, Users, Zap, Award, Package } from 'lucide-react';
+import { Star, Heart, Minus, Plus, ChevronLeft, ChevronRight, Truck, ShieldCheck, Gift, Clock, Sparkles, Check, Users, Zap, Award, Package, RotateCcw, Shield } from 'lucide-react';
 import { productData } from '../data';
 
 const Version3: React.FC = () => {
@@ -14,7 +14,7 @@ const Version3: React.FC = () => {
       <div className="min-h-screen bg-white text-gray-900 font-instrument">
          
          {/* Urgency Banner */}
-         <div className="bg-[#567E73] text-white py-2 px-3 text-center">
+         <div className="bg-gradient-to-r from-[#A8D8EA] to-[#AAC4FF] text-gray-900 py-2 px-3 text-center">
             <p className="text-xs sm:text-sm font-medium flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap">
                <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
                <span><strong>Flash Sale!</strong> 20% off ends in 2:47:33</span>
@@ -43,9 +43,9 @@ const Version3: React.FC = () => {
                   {/* Mobile Gallery - Full Screen Hero with Thumbnails */}
                   <div className="lg:hidden relative -mt-1">
                      {/* Main Hero Image */}
-                     <div className="relative aspect-square bg-gradient-to-b from-[#567E73]/5 to-white rounded-2xl overflow-hidden">
+                     <div className="relative aspect-square bg-gradient-to-b from-[#FFE5EC]/50 to-white rounded-2xl overflow-hidden">
                         {/* Sale Badge */}
-                        <div className="absolute top-2 left-2 z-20 bg-[#567E73] text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
+                        <div className="absolute top-2 left-2 z-20 bg-[#A8D8EA] text-gray-900 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
                            <Sparkles className="w-3 h-3" />
                            SAVE ₹{savings}
                         </div>
@@ -53,9 +53,9 @@ const Version3: React.FC = () => {
                         {/* Like Button */}
                         <button
                            onClick={() => setIsLiked(!isLiked)}
-                           className={`absolute top-2 right-2 z-20 p-2.5 rounded-full shadow-lg transition-all duration-300 ${isLiked ? 'bg-[#567E73] text-white scale-110' : 'bg-white text-gray-400'}`}
+                           className={`absolute top-2 right-2 z-20 p-2.5 rounded-full shadow-lg transition-all duration-300 ${isLiked ? 'bg-[#A8D8EA] text-gray-900 scale-110' : 'bg-white text-gray-400'}`}
                         >
-                           <Heart className={`w-5 h-5 transition-all ${isLiked ? 'fill-white' : ''}`} />
+                           <Heart className={`w-5 h-5 transition-all ${isLiked ? 'fill-gray-900' : ''}`} />
                         </button>
 
                         {/* Main Image with Animation */}
@@ -82,7 +82,7 @@ const Version3: React.FC = () => {
                               onClick={() => setMIndex(i)}
                               className={`flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden transition-all duration-300 ${
                                  i === mIndex 
-                                    ? 'ring-2 ring-[#567E73] ring-offset-1 scale-105' 
+                                    ? 'ring-2 ring-[#A8D8EA] ring-offset-1 scale-105' 
                                     : 'opacity-50 hover:opacity-80'
                               }`}
                            >
@@ -101,8 +101,8 @@ const Version3: React.FC = () => {
                               key={i}
                               onClick={() => setMainImage(img)}
                               className={`w-20 h-20 rounded-xl overflow-hidden transition-all duration-300 border-2 ${mainImage === img
-                                 ? 'border-[#567E73] shadow-lg'
-                                 : 'border-gray-200 opacity-60 hover:opacity-100 hover:border-[#567E73]/50'
+                                 ? 'border-[#A8D8EA] shadow-lg'
+                                 : 'border-gray-200 opacity-60 hover:opacity-100 hover:border-[#A8D8EA]/50'
                                  }`}
                            >
                               <img src={img} className="w-full h-full object-cover" alt={`View ${i + 1}`} />
@@ -114,7 +114,7 @@ const Version3: React.FC = () => {
                      <div className="flex-1 relative bg-white rounded-3xl aspect-square flex items-center justify-center overflow-hidden border border-gray-100 animate-scale-in">
                         {/* Sale Badge */}
                         <div className="absolute top-6 left-6 z-20">
-                           <div className="bg-[#567E73] text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2">
+                           <div className="bg-[#A8D8EA] text-gray-900 px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2">
                               <Sparkles className="w-4 h-4" />
                               SAVE ₹{savings}
                            </div>
@@ -123,9 +123,9 @@ const Version3: React.FC = () => {
                         {/* Like Button */}
                         <button
                            onClick={() => setIsLiked(!isLiked)}
-                           className={`absolute top-6 right-6 z-20 p-3.5 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${isLiked ? 'bg-[#567E73] text-white' : 'bg-white text-gray-400 hover:text-[#567E73]'}`}
+                           className={`absolute top-6 right-6 z-20 p-3.5 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${isLiked ? 'bg-[#A8D8EA] text-gray-900' : 'bg-white text-gray-400 hover:text-[#6BA3B8]'}`}
                         >
-                           <Heart className={`w-6 h-6 transition-all ${isLiked ? 'fill-white' : ''}`} />
+                           <Heart className={`w-6 h-6 transition-all ${isLiked ? 'fill-gray-900' : ''}`} />
                         </button>
 
                         <img
@@ -140,15 +140,15 @@ const Version3: React.FC = () => {
                   <div className="hidden lg:flex items-center justify-center gap-6 mt-8 p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
                      <div className="flex items-center gap-2">
                         <div className="flex -space-x-2">
-                           <div className="w-8 h-8 rounded-full bg-[#567E73]/20 border-2 border-white flex items-center justify-center text-xs font-bold text-[#567E73]">A</div>
-                           <div className="w-8 h-8 rounded-full bg-[#6B9389]/20 border-2 border-white flex items-center justify-center text-xs font-bold text-[#567E73]">M</div>
-                           <div className="w-8 h-8 rounded-full bg-[#7BA89D]/20 border-2 border-white flex items-center justify-center text-xs font-bold text-[#567E73]">S</div>
+                           <div className="w-8 h-8 rounded-full bg-[#A8D8EA]/20 border-2 border-white flex items-center justify-center text-xs font-bold text-[#6BA3B8]">A</div>
+                           <div className="w-8 h-8 rounded-full bg-[#6BA3B8]/40 border-2 border-white flex items-center justify-center text-xs font-bold text-[#6BA3B8]">M</div>
+                           <div className="w-8 h-8 rounded-full bg-[#8365AD]/40 border-2 border-white flex items-center justify-center text-xs font-bold text-[#8365AD]">S</div>
                         </div>
                         <span className="text-sm text-gray-600"><strong className="text-gray-900">127 people</strong> bought this today</span>
                      </div>
                      <div className="w-px h-6 bg-gray-200"></div>
                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4 text-[#567E73]" />
+                        <Users className="w-4 h-4 text-[#6BA3B8]" />
                         <span className="text-sm text-gray-600"><strong className="text-gray-900">23 viewing</strong> right now</span>
                      </div>
                   </div>
@@ -156,17 +156,17 @@ const Version3: React.FC = () => {
 
                {/* Right: Product Details */}
                <div className="lg:col-span-5 animate-slide-in-right">
-                  <div className="lg:sticky lg:top-6 bg-gray-50/70 lg:rounded-3xl lg:p-8">
+                  <div className="lg:sticky lg:top-6 lg:bg-[#FAF5EF] lg:rounded-[50px] lg:p-8">
                      
                      {/* Trust Badge */}
                      <div className="flex items-center gap-2 mb-4">
-                        <div className="flex items-center gap-1 px-2.5 py-1 bg-[#567E73]/10 rounded-full">
-                           <Check className="w-3.5 h-3.5 text-[#567E73]" />
-                           <span className="text-xs font-semibold text-[#567E73]">Verified Seller</span>
+                        <div className="flex items-center gap-1 px-2.5 py-1 bg-[#A8D8EA]/10 rounded-full">
+                           <Check className="w-3.5 h-3.5 text-[#6BA3B8]" />
+                           <span className="text-xs font-semibold text-[#6BA3B8]">Verified Seller</span>
                         </div>
-                        <div className="flex items-center gap-1 px-2.5 py-1 bg-[#567E73]/20 rounded-full">
-                           <Award className="w-3.5 h-3.5 text-[#4a6d63]" />
-                           <span className="text-xs font-semibold text-[#4a6d63]">Best Seller</span>
+                        <div className="flex items-center gap-1 px-2.5 py-1 bg-[#A8D8EA]/20 rounded-full">
+                           <Award className="w-3.5 h-3.5 text-[#8365AD]" />
+                           <span className="text-xs font-semibold text-[#8365AD]">Best Seller</span>
                         </div>
                      </div>
 
@@ -190,13 +190,13 @@ const Version3: React.FC = () => {
                      </div>
 
                      {/* Price Section */}
-                     <div className="bg-[#567E73]/5 rounded-2xl p-5 mb-6 border border-[#567E73]/20">
+                     <div className="bg-[#A8D8EA]/5 rounded-2xl p-5 mb-6 border border-[#A8D8EA]/20">
                         <div className="flex items-center gap-3 mb-2">
                            <span className="text-4xl font-bold text-gray-900">₹{productData.price}</span>
                            <span className="text-xl text-gray-400 line-through">₹{originalPrice}</span>
-                           <span className="px-3 py-1 bg-[#567E73] text-white text-sm font-bold rounded-full">20% OFF</span>
+                           <span className="px-3 py-1 bg-[#A8D8EA] text-gray-900 text-sm font-bold rounded-full">20% OFF</span>
                         </div>
-                        <p className="text-sm text-[#4a6d63] font-medium flex items-center gap-1.5">
+                        <p className="text-sm text-[#6BA3B8] font-medium flex items-center gap-1.5">
                            <Clock className="w-4 h-4" />
                            Sale ends soon — Only 8 left at this price!
                         </p>
@@ -215,44 +215,45 @@ const Version3: React.FC = () => {
                         <div className="flex gap-2">
                            <button 
                               onClick={() => setSelectedSize('standard')}
-                              className={`flex-1 px-3 py-2 rounded-lg border text-sm transition-all ${selectedSize === 'standard' ? 'border-[#567E73] bg-[#567E73]/5 text-gray-900 font-medium' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}
+                              className={`flex-1 px-3 py-2 rounded-lg border text-sm transition-all ${selectedSize === 'standard' ? 'border-[#A8D8EA] bg-[#A8D8EA]/5 text-gray-900 font-medium' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}
                            >
                               31" Standard
                            </button>
                            <button 
                               onClick={() => setSelectedSize('jumbo')}
-                              className={`flex-1 px-3 py-2 rounded-lg border text-sm transition-all relative ${selectedSize === 'jumbo' ? 'border-[#567E73] bg-[#567E73]/5 text-gray-900 font-medium' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}
+                              className={`flex-1 px-3 py-2 rounded-lg border text-sm transition-all relative ${selectedSize === 'jumbo' ? 'border-[#A8D8EA] bg-[#A8D8EA]/5 text-gray-900 font-medium' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}
                            >
                               45" Jumbo
-                              <span className="absolute -top-1.5 -right-1.5 bg-[#567E73] text-white text-[9px] font-bold px-1.5 py-0.5 rounded">HOT</span>
+                              <span className="absolute -top-1.5 -right-1.5 bg-[#A8D8EA] text-gray-900 text-[9px] font-bold px-1.5 py-0.5 rounded">HOT</span>
                            </button>
                         </div>
                      </div>
 
                      {/* Quantity & Add to Cart */}
                      <div className="mb-6">
-                        <div className="flex items-center gap-4 mb-4">
-                           <div className="flex items-center bg-gray-100 rounded-full overflow-hidden">
+                        <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-200">
+                           <div className="flex flex-col">
+                              <span className="text-sm font-medium text-gray-600">Quantity</span>
+                              <span className="text-lg font-bold text-gray-900">Total: ₹{(productData.price * quantity).toFixed(2)}</span>
+                           </div>
+                           <div className="flex items-center bg-white rounded-full px-1 py-1 shadow-sm border border-gray-200">
                               <button
                                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                 className="w-12 h-12 flex items-center justify-center hover:bg-gray-200 transition-colors text-gray-700"
+                                 className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center text-gray-600 transition-colors"
                               >
                                  <Minus className="w-4 h-4" />
                               </button>
-                              <span className="w-12 text-center font-bold text-lg">{quantity}</span>
+                              <span className="w-10 sm:w-12 text-center font-semibold text-base">{quantity}</span>
                               <button
                                  onClick={() => setQuantity(quantity + 1)}
-                                 className="w-12 h-12 flex items-center justify-center hover:bg-gray-200 transition-colors text-gray-700"
+                                 className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#6BA3B8] hover:bg-[#5A8FA3] text-white flex items-center justify-center transition-colors"
                               >
                                  <Plus className="w-4 h-4" />
                               </button>
                            </div>
-                           <div className="text-sm text-gray-600">
-                              Total: <span className="font-bold text-gray-900 text-lg">₹{(productData.price * quantity).toFixed(2)}</span>
-                           </div>
                         </div>
 
-                        <button className="w-full bg-[#567E73] text-white py-4 rounded-full font-bold text-base shadow-xl shadow-[#567E73]/30 hover:shadow-2xl hover:shadow-[#567E73]/40 hover:bg-[#4a6d63] transition-all duration-300 hover:scale-[1.02] transform flex items-center justify-center gap-2 mb-3">
+                        <button className="w-full bg-[#A8D8EA] text-gray-900 py-4 rounded-full font-bold text-base shadow-xl shadow-[#A8D8EA]/30 hover:shadow-2xl hover:shadow-[#A8D8EA]/40 hover:bg-[#8FC7E8] transition-all duration-300 hover:scale-[1.02] transform flex items-center justify-center gap-2 mb-3">
                            <Gift className="w-5 h-5" />
                            Add to Cart
                         </button>
@@ -271,50 +272,55 @@ const Version3: React.FC = () => {
                         `}</style>
                      </div>
 
-                     {/* Trust Indicators */}
-                     <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-6">
-                        <div className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
-                           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#567E73]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                              <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-[#567E73]" />
+                     {/* Express Shipping Section */}
+                     <div className="grid grid-cols-4 gap-2 sm:gap-3 mb-6 pt-6 border-t border-gray-200">
+                        <div className="flex flex-col items-center text-center group">
+                           <div className="w-10 h-10 bg-[#A8D8EA]/10 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-[#A8D8EA]/20 transition-colors">
+                              <Package className="w-5 h-5 sm:w-6 sm:h-6 text-[#6BA3B8]" />
                            </div>
-                           <div className="min-w-0">
-                              <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">Cash on Delivery</p>
-                              <p className="text-[10px] sm:text-xs text-gray-500">Pay when you receive</p>
-                           </div>
+                           <span className="text-[10px] sm:text-[11px] font-semibold text-gray-900">Express Shipping</span>
+                           <span className="text-[10px] sm:text-[11px] text-gray-500">Available</span>
                         </div>
-                        <div className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
-                           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#6B9389]/20 rounded-full flex items-center justify-center flex-shrink-0">
-                              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-[#567E73]" />
+                        <div className="flex flex-col items-center text-center group">
+                           <div className="w-10 h-10 bg-[#A8D8EA]/10 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-[#A8D8EA]/20 transition-colors">
+                              <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-[#6BA3B8]" />
                            </div>
-                           <div className="min-w-0">
-                              <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">Quality Promise</p>
-                              <p className="text-[10px] sm:text-xs text-gray-500">100% satisfaction</p>
-                           </div>
+                           <span className="text-[10px] sm:text-[11px] font-semibold text-gray-900">Quality</span>
+                           <span className="text-[10px] sm:text-[11px] text-gray-500">Guarantee</span>
                         </div>
-                        <div className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
-                           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#7BA89D]/20 rounded-full flex items-center justify-center flex-shrink-0">
-                              <Package className="w-4 h-4 sm:w-5 sm:h-5 text-[#567E73]" />
+                        <div className="flex flex-col items-center text-center group">
+                           <div className="w-10 h-10 bg-[#A8D8EA]/10 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-[#A8D8EA]/20 transition-colors">
+                              <Truck className="w-5 h-5 sm:w-6 sm:h-6 text-[#6BA3B8]" />
                            </div>
-                           <div className="min-w-0">
-                              <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">Ships Tomorrow</p>
-                              <p className="text-[10px] sm:text-xs text-gray-500">Order in 4h 23m</p>
-                           </div>
+                           <span className="text-[10px] sm:text-[11px] font-semibold text-gray-900">Cash on Delivery</span>
+                           <span className="text-[10px] sm:text-[11px] text-gray-500">Pay when received</span>
                         </div>
-                        <div className="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
-                           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#567E73]/15 rounded-full flex items-center justify-center flex-shrink-0">
-                              <Gift className="w-4 h-4 sm:w-5 sm:h-5 text-[#567E73]" />
+                        <div className="flex flex-col items-center text-center group">
+                           <div className="w-10 h-10 bg-[#A8D8EA]/10 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-[#A8D8EA]/20 transition-colors">
+                              <RotateCcw className="w-5 h-5 sm:w-6 sm:h-6 text-[#6BA3B8]" />
                            </div>
-                           <div className="min-w-0">
-                              <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">Gift Ready</p>
-                              <p className="text-[10px] sm:text-xs text-gray-500">Beautiful packaging</p>
-                           </div>
+                           <span className="text-[10px] sm:text-[11px] font-semibold text-gray-900">Easy Returns</span>
+                           <span className="text-[10px] sm:text-[11px] text-gray-500">No Hassle</span>
+                        </div>
+                     </div>
+
+                     {/* Product Details */}
+                     <div className="pt-6 pb-6 border-t border-gray-200">
+                        <h3 className="text-sm font-semibold text-gray-900 mb-4">PRODUCT DETAILS</h3>
+                        <div className="space-y-3">
+                           {productData.attributes.map((attr) => (
+                              <div key={attr.label} className="flex justify-between text-sm">
+                                 <span className="text-gray-600">{attr.label}:</span>
+                                 <span className="font-medium text-gray-900">{attr.value}</span>
+                              </div>
+                           ))}
                         </div>
                      </div>
 
                      {/* Customer Review Highlight */}
-                     <div className="bg-[#567E73]/5 rounded-2xl p-3 sm:p-5 border border-[#567E73]/10">
+                     <div className="bg-[#A8D8EA]/5 rounded-2xl p-3 sm:p-5 border border-[#A8D8EA]/10 mb-6 mt-6">
                         <div className="flex items-start gap-2.5 sm:gap-3">
-                           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#567E73] flex items-center justify-center text-white font-bold text-sm sm:text-lg flex-shrink-0">
+                           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#A8D8EA] flex items-center justify-center text-gray-900 font-bold text-sm sm:text-lg flex-shrink-0">
                               P
                            </div>
                            <div className="min-w-0 flex-1">
@@ -323,12 +329,24 @@ const Version3: React.FC = () => {
                                  <div className="flex items-center gap-0.5">
                                     {[1,2,3,4,5].map(i => <Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-amber-400 text-amber-400" />)}
                                  </div>
-                                 <span className="text-[10px] sm:text-xs text-[#567E73] font-medium">Verified Purchase</span>
+                                 <span className="text-[10px] sm:text-xs text-[#6BA3B8] font-medium">Verified Purchase</span>
                               </div>
                               <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                                  "My daughter's face when she saw this balloon was priceless! 😍 The quality is amazing and it stayed inflated for days. Already ordered more for her friend's party!"
                               </p>
                            </div>
+                        </div>
+                     </div>
+
+                     {/* Coordinated Products */}
+                     <div>
+                        <h4 className="text-sm sm:text-[15px] font-semibold text-gray-900 mb-3 sm:mb-4">Coordinated:</h4>
+                        <div className="grid grid-cols-4 gap-3 sm:gap-4">
+                           {productData.coordinated.slice(0, 8).map(prod => (
+                              <div key={prod.id} className="w-full aspect-square rounded-full border-[3px] border-[#A8D8EA] bg-white overflow-hidden hover:scale-105 transition-transform cursor-pointer p-2 sm:p-3">
+                                 <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
+                              </div>
+                           ))}
                         </div>
                      </div>
 
@@ -340,44 +358,19 @@ const Version3: React.FC = () => {
             <div className="lg:hidden flex items-center justify-center gap-4 mt-6 p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
                <div className="flex items-center gap-2">
                   <div className="flex -space-x-2">
-                     <div className="w-7 h-7 rounded-full bg-[#567E73]/20 border-2 border-white flex items-center justify-center text-xs font-bold text-[#567E73]">A</div>
-                     <div className="w-7 h-7 rounded-full bg-[#6B9389]/20 border-2 border-white flex items-center justify-center text-xs font-bold text-[#567E73]">M</div>
-                     <div className="w-7 h-7 rounded-full bg-[#7BA89D]/20 border-2 border-white flex items-center justify-center text-xs font-bold text-[#567E73]">S</div>
+                     <div className="w-7 h-7 rounded-full bg-[#A8D8EA]/20 border-2 border-white flex items-center justify-center text-xs font-bold text-[#6BA3B8]">A</div>
+                     <div className="w-7 h-7 rounded-full bg-[#6BA3B8]/40 border-2 border-white flex items-center justify-center text-xs font-bold text-[#6BA3B8]">M</div>
+                     <div className="w-7 h-7 rounded-full bg-[#8365AD]/40 border-2 border-white flex items-center justify-center text-xs font-bold text-[#8365AD]">S</div>
                   </div>
                   <span className="text-xs text-gray-600"><strong>127</strong> bought today</span>
                </div>
                <div className="w-px h-5 bg-gray-200"></div>
                <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 bg-[#567E73] rounded-full animate-pulse"></span>
+                  <span className="w-2 h-2 bg-[#A8D8EA] rounded-full animate-pulse"></span>
                   <span className="text-xs text-gray-600"><strong>23</strong> viewing now</span>
                </div>
             </div>
 
-            {/* You Might Also Like */}
-            <div className="mt-12 lg:mt-16">
-               <div className="text-center mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Complete the Celebration</h2>
-                  <p className="text-gray-500">Customers who bought this also loved these</p>
-               </div>
-               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {productData.coordinated.slice(0, 4).map(item => (
-                     <div key={item.id} className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
-                        <div className="aspect-square bg-white overflow-hidden relative">
-                           <img
-                              src={item.image}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                              alt={item.name}
-                           />
-                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
-                        </div>
-                        <div className="p-4">
-                           <p className="font-medium text-gray-900 text-sm mb-1 truncate">{item.name}</p>
-                           <p className="text-[#567E73] font-bold">₹{(Math.random() * 10 + 5).toFixed(2)}</p>
-                        </div>
-                     </div>
-                  ))}
-               </div>
-            </div>
          </div>
 
          </div>

@@ -1,27 +1,9 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Heart, Sparkles } from 'lucide-react';
+import { Mail, Phone, MapPin, Heart } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
     <footer className="bg-white text-gray-900 mt-auto border-t border-gray-100">
-      
-      {/* Emotional Banner */}
-      <div className="bg-gradient-to-r from-rose-50 via-amber-50 to-pink-50 py-10 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <Sparkles className="w-5 h-5 text-amber-500" />
-            <span className="text-sm font-medium text-amber-700 uppercase tracking-wider">Creating Memories</span>
-            <Sparkles className="w-5 h-5 text-amber-500" />
-          </div>
-          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-            Every Celebration Tells a Story
-          </h3>
-          <p className="text-gray-600 leading-relaxed">
-            From first birthdays to golden anniversaries, we're honored to be part of your most cherished moments. 
-            Let's make every celebration unforgettable, together.
-          </p>
-        </div>
-      </div>
 
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-6 py-12">

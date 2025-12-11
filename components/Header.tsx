@@ -8,10 +8,8 @@ interface HeaderProps {
 
 const versionOptions = [
   { id: 1 as const, name: 'Grabo', color: 'bg-blue-600' },
-  { id: 2 as const, name: 'Minimal', color: 'bg-purple-600' },
   { id: 3 as const, name: 'Contrast', color: 'bg-black' },
   { id: 4 as const, name: 'Classic', color: 'bg-amber-600' },
-  { id: 5 as const, name: 'High-Conversion', color: 'bg-black' },
 ];
 
 const Header: React.FC<HeaderProps> = ({ version, onVersionChange }) => {
@@ -19,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ version, onVersionChange }) => {
 
   return (
     <>
-      <header className="bg-white sticky top-0 z-50 border-b border-gray-100">
+      <header className="bg-[#FAF5EF] border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <span className="text-2xl font-bold tracking-tight">Party Bazar</span>
 
@@ -29,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ version, onVersionChange }) => {
               <button
                 key={opt.id}
                 onClick={() => onVersionChange(opt.id)}
-                className={`px-4 py-2 text-sm font-medium transition-all relative ${version === opt.id ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}
+                className={`px-4 py-2 text-[16px] font-medium transition-all relative ${version === opt.id ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}
               >
                 {opt.name}
                 {version === opt.id && (
