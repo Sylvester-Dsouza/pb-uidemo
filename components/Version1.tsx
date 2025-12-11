@@ -2,8 +2,34 @@ import React, { useState } from 'react';
 import { Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { productData } from '../data';
 
+const upsellProducts = [
+  { image: '/upsell/op1.jpg', name: 'Chubby Star' },
+  { image: '/upsell/po2.jpg', name: 'Chubby Star mini' },
+  { image: '/upsell/po3.jpg', name: 'Welcome Baby Moon' },
+  { image: '/upsell/op4.jpg', name: 'R18 Gender Reveal' },
+];
+
 const Version1: React.FC = () => {
   const [mIndex, setMIndex] = useState(0);
+  const [upsellIndex, setUpsellIndex] = useState(0);
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null);
+
+  const handleUpsellPrev = () => {
+    setSlideDirection('right');
+    setTimeout(() => {
+      setUpsellIndex(upsellIndex > 0 ? upsellIndex - 1 : upsellProducts.length - 1);
+      setSlideDirection(null);
+    }, 150);
+  };
+
+  const handleUpsellNext = () => {
+    setSlideDirection('left');
+    setTimeout(() => {
+      setUpsellIndex(upsellIndex < upsellProducts.length - 1 ? upsellIndex + 1 : 0);
+      setSlideDirection(null);
+    }, 150);
+  };
+
   return (
     <div className="bg-white min-h-screen pb-20 font-montserrat text-slate-800">
       {/* Breadcrumbs - Desktop */}
@@ -167,25 +193,63 @@ const Version1: React.FC = () => {
       {/* Other Products Section */}
       <div className="bg-[#FAF5EF] py-12 lg:py-16">
         <div className="max-w-[1170px] mx-auto px-4 xl:px-[60px]">
-          <h2 className="text-[24px] lg:text-[32px] font-bold text-black text-center mb-8 lg:mb-12">
-            Other products may interest you
+          <h2 className="text-[24px] lg:text-[32px] font-bold text-black text-center mb-4 lg:mb-12 italic lg:not-italic">
+            Other products<br className="lg:hidden" /> may interest you
           </h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-            {[
-              { image: '/upsell/op1.jpg', name: 'Chubby Star' },
-              { image: '/upsell/po2.jpg', name: 'Chubby Star mini' },
-              { image: '/upsell/po3.jpg', name: 'Welcome Baby Moon' },
-              { image: '/upsell/op4.jpg', name: 'R18 Gender Reveal' },
-            ].map((product, idx) => (
+          
+          {/* Mobile Carousel */}
+          <div className="lg:hidden">
+            {/* Navigation Arrows */}
+            <div className="flex justify-end gap-3 mb-4">
+              <button 
+                onClick={handleUpsellPrev}
+                className="w-12 h-12 rounded-full border-2 border-[#5B9FD7] flex items-center justify-center text-[#5B9FD7] hover:bg-[#5B9FD7] hover:text-white transition-colors"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button 
+                onClick={handleUpsellNext}
+                className="w-12 h-12 rounded-full border-2 border-[#5B9FD7] flex items-center justify-center text-[#5B9FD7] hover:bg-[#5B9FD7] hover:text-white transition-colors"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
+            
+            {/* Single Product Card with Slide Animation */}
+            <div className="overflow-hidden">
+              <div 
+                className={`flex flex-col items-center cursor-pointer transition-all duration-300 ease-out ${
+                  slideDirection === 'left' ? '-translate-x-full opacity-0' : 
+                  slideDirection === 'right' ? 'translate-x-full opacity-0' : 
+                  'translate-x-0 opacity-100'
+                }`}
+              >
+                <div className="bg-white rounded-3xl p-8 mb-4 w-full aspect-square flex items-center justify-center overflow-hidden">
+                  <img 
+                    src={upsellProducts[upsellIndex].image} 
+                    alt={upsellProducts[upsellIndex].name} 
+                    className="w-full h-full object-contain" 
+                  />
+                </div>
+                <span className={`text-[16px] font-normal ${upsellIndex === 3 ? 'text-[#5B9FD7]' : 'text-black'}`}>
+                  {upsellProducts[upsellIndex].name}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Grid */}
+          <div className="hidden lg:grid grid-cols-4 gap-6">
+            {upsellProducts.map((product, idx) => (
               <div key={idx} className="flex flex-col items-center cursor-pointer group">
-                <div className="bg-white rounded-2xl p-6 lg:p-8 mb-3 w-full aspect-[4/5] flex items-center justify-center overflow-hidden">
+                <div className="bg-white rounded-2xl p-8 mb-3 w-full aspect-[4/5] flex items-center justify-center overflow-hidden">
                   <img 
                     src={product.image} 
                     alt={product.name} 
                     className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" 
                   />
                 </div>
-                <span className={`text-[14px] lg:text-[16px] font-normal ${idx === 3 ? 'text-[#5B9FD7]' : 'text-black'}`}>
+                <span className={`text-[16px] font-normal ${idx === 3 ? 'text-[#5B9FD7]' : 'text-black'}`}>
                   {product.name}
                 </span>
               </div>
