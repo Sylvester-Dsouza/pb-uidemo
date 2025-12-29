@@ -4,15 +4,16 @@ import { Search, ShoppingCart, Menu, X } from 'lucide-react';
 interface HeaderProps {
   version: 'c1' | 'c2' | 'c3';
   onVersionChange: (version: 'c1' | 'c2' | 'c3') => void;
+  cartCount: number;
 }
 
 const versionOptions = [
   { id: 'c1' as const, name: 'Contrast 1', color: 'bg-black' },
-  { id: 'c2' as const, name: 'Contrast 2', color: 'bg-gray-800' },
-  { id: 'c3' as const, name: 'Contrast 3', color: 'bg-gray-700' },
+  { id: 'c2' as const, name: 'Teal/Orange', color: 'bg-gray-800' },
+  { id: 'c3' as const, name: 'Pink/Blue', color: 'bg-gray-700' },
 ];
 
-const Header: React.FC<HeaderProps> = ({ version, onVersionChange }) => {
+const Header: React.FC<HeaderProps> = ({ version, onVersionChange, cartCount }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -42,7 +43,9 @@ const Header: React.FC<HeaderProps> = ({ version, onVersionChange }) => {
               <Search className="w-5 h-5" />
             </button>
             <div className="relative">
-              <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">{cartCount}</span>
+              )}
               <ShoppingCart className="w-5 h-5 text-gray-800" />
             </div>
             <button className="md:hidden" onClick={() => setMobileMenuOpen(true)}>

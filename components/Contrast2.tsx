@@ -8,7 +8,11 @@ const reviews = [
    { name: 'Anita K.', initial: 'A', rating: 4, text: "Great quality balloon, my kids loved it! Delivery was quick and the product matched the photos exactly. ⭐" },
 ];
 
-const Version5: React.FC = () => {
+interface Contrast2Props {
+   onAddToCart: () => void;
+}
+
+const Contrast2: React.FC<Contrast2Props> = ({ onAddToCart }) => {
    const [mainImage, setMainImage] = useState(productData.images[0]);
    const [quantity, setQuantity] = useState(1);
    const [isLiked, setIsLiked] = useState(false);
@@ -21,6 +25,7 @@ const Version5: React.FC = () => {
    const handleAddToCart = () => {
       setShowConfetti(true);
       setTimeout(() => setShowConfetti(false), 2000);
+      onAddToCart();
    };
    return (
       <div className="min-h-screen bg-white text-gray-900 font-instrument">
@@ -160,7 +165,7 @@ const Version5: React.FC = () => {
 
                {/* Right: Product Details */}
                <div className="lg:col-span-5 animate-slide-in-right">
-                  <div className="lg:sticky lg:top-6 lg:bg-[#FAF5EF] lg:rounded-[50px] lg:p-8">
+                  <div className="lg:sticky lg:top-6 lg:bg-orange-50 lg:rounded-[50px] lg:p-8">
                      
                      {/* SKU & Trust Badge */}
                      <div className="flex items-center justify-between mb-4">
@@ -170,7 +175,7 @@ const Version5: React.FC = () => {
                      </div>
 
                      {/* Product Title */}
-                     <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-teal-500 leading-tight mb-3">
+                     <h1 className="text-[28px] sm:text-2xl lg:text-3xl font-bold text-teal-500 leading-tight mb-3">
                         {productData.name}
                      </h1>
 
@@ -433,4 +438,4 @@ const Version5: React.FC = () => {
    );
 };
 
-export default Version5;
+export default Contrast2;

@@ -8,7 +8,11 @@ const reviews = [
    { name: 'Anita K.', initial: 'A', rating: 4, text: "Great quality balloon, my kids loved it! Delivery was quick and the product matched the photos exactly. ⭐" },
 ];
 
-const Version6: React.FC = () => {
+interface Contrast3Props {
+   onAddToCart: () => void;
+}
+
+const Contrast3: React.FC<Contrast3Props> = ({ onAddToCart }) => {
    const [mainImage, setMainImage] = useState(productData.images[0]);
    const [quantity, setQuantity] = useState(1);
    const [isLiked, setIsLiked] = useState(false);
@@ -21,6 +25,7 @@ const Version6: React.FC = () => {
    const handleAddToCart = () => {
       setShowConfetti(true);
       setTimeout(() => setShowConfetti(false), 2000);
+      onAddToCart();
    };
    return (
       <div className="min-h-screen bg-white text-gray-900 font-instrument">
@@ -172,7 +177,7 @@ const Version6: React.FC = () => {
                      </div>
 
                      {/* Product Title */}
-                     <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-pink-400 leading-tight mb-3">
+                     <h1 className="text-[28px] sm:text-2xl lg:text-3xl font-bold text-pink-400 leading-tight mb-3">
                         {productData.name}
                      </h1>
 
@@ -435,4 +440,4 @@ const Version6: React.FC = () => {
    );
 };
 
-export default Version6;
+export default Contrast3;

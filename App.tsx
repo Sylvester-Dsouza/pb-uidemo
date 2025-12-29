@@ -9,15 +9,20 @@ import Contrast3 from './components/Contrast3';
 
 function App() {
   const [version, setVersion] = useState<'c1' | 'c2' | 'c3'>('c1');
+  const [cartCount, setCartCount] = useState(0);
+
+  const handleAddToCart = () => {
+    setCartCount(cartCount + 1);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header version={version} onVersionChange={setVersion} />
+      <Header version={version} onVersionChange={setVersion} cartCount={cartCount} />
 
       <main>
-        {version === 'c1' && <Contrast1 />}
-        {version === 'c2' && <Contrast2 />}
-        {version === 'c3' && <Contrast3 />}
+        {version === 'c1' && <Contrast1 onAddToCart={handleAddToCart} />}
+        {version === 'c2' && <Contrast2 onAddToCart={handleAddToCart} />}
+        {version === 'c3' && <Contrast3 onAddToCart={handleAddToCart} />}
       </main>
 
       <Footer />
