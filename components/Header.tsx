@@ -8,8 +8,6 @@ interface HeaderProps {
 }
 
 const versionOptions = [
-  { id: 'c1' as const, name: 'Contrast 1', color: 'bg-black' },
-  { id: 'c2' as const, name: 'Teal/Orange', color: 'bg-gray-800' },
   { id: 'c3' as const, name: 'Pink/Blue', color: 'bg-gray-700' },
 ];
 
@@ -20,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({ version, onVersionChange, cartCount }) 
     <>
       <header className="bg-[#FAF5EF] border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="text-2xl font-bold tracking-tight">Party Bazar</span>
+          <span className="text-2xl font-bold tracking-tight">Party Bazaar</span>
 
           {/* Version Switcher - Desktop Menu */}
           <nav className="hidden md:flex items-center gap-1">

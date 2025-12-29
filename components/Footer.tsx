@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           
           {/* Brand */}
           <div className="lg:col-span-1">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Party Bazar</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Party Bazaar</h3>
             <p className="text-gray-600 text-sm leading-relaxed mb-4">
               Your one-stop destination for premium party supplies, decorations, and celebration essentials. We believe every moment deserves to be celebrated.
             </p>
@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 py-5">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-gray-500 text-sm flex items-center gap-1.5">
-              © {new Date().getFullYear()} Party Bazar. <span className="hidden sm:inline">Made with <Heart className="w-4 h-4 text-rose-500 fill-rose-500 inline" /> for celebrations.</span>
+              © {new Date().getFullYear()} Party Bazaar. <span className="hidden sm:inline">Made with <Heart className="w-4 h-4 text-rose-500 fill-rose-500 inline" /> for celebrations.</span>
             </p>
             <div className="hidden sm:flex items-center gap-6">
               <a href="#" className="text-gray-500 hover:text-gray-900 text-sm transition-colors">Privacy Policy</a>

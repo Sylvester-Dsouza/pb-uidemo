@@ -18,13 +18,12 @@ const Contrast3: React.FC<Contrast3Props> = ({ onAddToCart }) => {
    const [isLiked, setIsLiked] = useState(false);
    const [mIndex, setMIndex] = useState(0);
    const [reviewIndex, setReviewIndex] = useState(0);
-   const [showConfetti, setShowConfetti] = useState(false);
+   const [balloonKey, setBalloonKey] = useState(0);
    const originalPrice = (productData.price * 1.25).toFixed(2);
    const savings = (parseFloat(originalPrice) - productData.price).toFixed(2);
 
    const handleAddToCart = () => {
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 2000);
+      setBalloonKey(prev => prev + 1);
       onAddToCart();
    };
    return (
@@ -62,9 +61,9 @@ const Contrast3: React.FC<Contrast3Props> = ({ onAddToCart }) => {
                         {/* Like Button */}
                         <button
                            onClick={() => setIsLiked(!isLiked)}
-                           className={`absolute top-2 right-2 z-20 p-2.5 rounded-full shadow-lg transition-all duration-300 ${isLiked ? 'bg-[#B8E4F0] text-gray-900 scale-110' : 'bg-white text-gray-400'}`}
+                           className={`absolute top-2 right-2 z-20 p-2.5 rounded-full shadow-lg transition-all duration-300 ${isLiked ? 'bg-pink-100 text-pink-500 scale-110' : 'bg-white text-gray-400'}`}
                         >
-                           <Heart className={`w-5 h-5 transition-all ${isLiked ? 'fill-gray-900' : ''}`} />
+                           <Heart className={`w-5 h-5 transition-all ${isLiked ? 'fill-pink-500' : ''}`} />
                         </button>
 
                         {/* Main Image with Animation */}
@@ -132,9 +131,9 @@ const Contrast3: React.FC<Contrast3Props> = ({ onAddToCart }) => {
                         {/* Like Button */}
                         <button
                            onClick={() => setIsLiked(!isLiked)}
-                           className={`absolute top-6 right-6 z-20 p-3.5 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${isLiked ? 'bg-[#B8E4F0] text-gray-900' : 'bg-white text-gray-400 hover:text-[#7EC8E3]'}`}
+                           className={`absolute top-6 right-6 z-20 p-3.5 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${isLiked ? 'bg-pink-100 text-pink-500' : 'bg-white text-gray-400 hover:text-pink-400'}`}
                         >
-                           <Heart className={`w-6 h-6 transition-all ${isLiked ? 'fill-gray-900' : ''}`} />
+                           <Heart className={`w-6 h-6 transition-all ${isLiked ? 'fill-pink-500' : ''}`} />
                         </button>
 
                         <img
@@ -197,16 +196,10 @@ const Contrast3: React.FC<Contrast3Props> = ({ onAddToCart }) => {
 
                      {/* Price Section */}
                      <div className="bg-blue-50 rounded-xl p-3 mb-4 border border-blue-200">
-                        <div className="flex items-center justify-between">
-                           <div className="flex items-center gap-2">
-                              <span className="text-2xl font-bold text-gray-900">₹{productData.price}</span>
-                              <span className="text-base text-gray-400 line-through">₹{originalPrice}</span>
-                              <span className="px-2 py-0.5 bg-pink-400 text-white text-xs font-bold rounded-full">20% OFF</span>
-                           </div>
-                           <p className="text-xs text-blue-600 font-medium flex items-center gap-1">
-                              <Clock className="w-3.5 h-3.5" />
-                              Only 8 left!
-                           </p>
+                        <div className="flex items-center gap-2">
+                           <span className="text-2xl font-bold text-gray-900">₹{productData.price}</span>
+                           <span className="text-base text-gray-400 line-through">₹{originalPrice}</span>
+                           <span className="px-2 py-0.5 bg-pink-400 text-white text-xs font-bold rounded-full">20% OFF</span>
                         </div>
                      </div>
 
@@ -247,16 +240,16 @@ const Contrast3: React.FC<Contrast3Props> = ({ onAddToCart }) => {
                         </div>
                         <div className="flex flex-col items-center text-center group">
                            <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-pink-200 transition-colors">
-                              <RotateCcw className="w-5 h-5 sm:w-6 sm:h-6 text-pink-500" />
+                              <ShieldCheck className="w-5 h-5 sm:w-6 sm:h-6 text-pink-500" />
                            </div>
-                           <span className="text-[9px] sm:text-[11px] font-semibold text-gray-900 leading-tight">Easy</span>
-                           <span className="text-[9px] sm:text-[11px] text-gray-500 leading-tight">Returns</span>
+                           <span className="text-[9px] sm:text-[11px] font-semibold text-gray-900 leading-tight">Secure</span>
+                           <span className="text-[9px] sm:text-[11px] text-gray-500 leading-tight">Payments</span>
                         </div>
                      </div>
 
                      {/* Quantity & Add to Cart */}
                      <div className="mb-6">
-                        <div className="flex items-center gap-3 mb-3 relative">
+                        <div className="flex items-center gap-3 mb-3 relative" id="add-to-cart-section">
                            {/* Quantity Selector */}
                            <div className="flex items-center bg-white rounded-full px-1 py-1 shadow-sm border border-gray-200">
                               <button
@@ -283,26 +276,47 @@ const Contrast3: React.FC<Contrast3Props> = ({ onAddToCart }) => {
                               Add to Cart — ₹{(productData.price * quantity).toFixed(2)}
                            </button>
                               
-                           {/* Confetti Animation - From Button */}
-                           {showConfetti && (
-                              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-50" style={{ width: '400px', height: '600px' }}>
-                                 {[...Array(50)].map((_, i) => (
-                                    <div
-                                       key={i}
-                                       className="absolute animate-confetti-burst"
-                                       style={{
-                                          left: '50%',
-                                          top: '50%',
-                                          animationDelay: `${Math.random() * 0.3}s`,
-                                          backgroundColor: ['#B8E4F0', '#FFD700', '#FF6B6B', '#7EC8E3', '#98D8AA', '#FFB6C1', '#DDA0DD', '#87CEEB', '#FFA500', '#FF69B4'][Math.floor(Math.random() * 10)],
-                                          width: `${Math.random() * 12 + 8}px`,
-                                          height: `${Math.random() * 12 + 8}px`,
-                                          borderRadius: Math.random() > 0.5 ? '50%' : '3px',
-                                          ['--x' as string]: `${(Math.random() - 0.5) * 300}px`,
-                                          ['--r' as string]: `${Math.random() * 1080}deg`,
-                                       }}
-                                    />
-                                 ))}
+                           {/* Balloon Animation - From Button */}
+                           {balloonKey > 0 && (
+                              <div key={balloonKey} className="absolute left-0 right-0 top-0 bottom-0 pointer-events-none z-50 overflow-visible">
+                                 {[...Array(20)].map((_, i) => {
+                                    const colors = ['#FF6B6B', '#4ECDC4', '#FFD93D', '#95E1D3', '#F38181', '#AA96DA', '#FCBAD3', '#A8E6CF', '#FFB6B9', '#FEC8D8', '#FF8B94', '#C7CEEA'];
+                                    const color = colors[i % colors.length];
+                                    const startX = -100 + Math.random() * 200;
+                                    const size = 0.8 + Math.random() * 0.4;
+                                    const drift = (Math.random() - 0.5) * 200;
+                                    const duration = 3 + Math.random() * 1.5;
+                                    const delay = Math.random() * 0.4;
+                                    
+                                    return (
+                                       <div
+                                          key={i}
+                                          className="absolute animate-balloon-from-button"
+                                          style={{
+                                             left: '50%',
+                                             top: '50%',
+                                             animationDelay: `${delay}s`,
+                                             animationDuration: `${duration}s`,
+                                             ['--start-x' as string]: `${startX}px`,
+                                             ['--drift' as string]: `${drift}px`,
+                                             ['--rotate' as string]: `${(Math.random() - 0.5) * 40}deg`,
+                                             transform: `scale(${size})`,
+                                          }}
+                                       >
+                                          <svg width="40" height="55" viewBox="0 0 40 55" style={{ filter: 'drop-shadow(0 3px 6px rgba(0,0,0,0.15))' }}>
+                                             {/* Balloon body */}
+                                             <ellipse cx="20" cy="20" rx="15" ry="19" fill={color} opacity="0.95"/>
+                                             {/* Shine effect */}
+                                             <ellipse cx="16" cy="14" rx="6" ry="8" fill="white" opacity="0.5"/>
+                                             <ellipse cx="14" cy="12" rx="3" ry="4" fill="white" opacity="0.7"/>
+                                             {/* Balloon knot */}
+                                             <path d="M20,39 Q18,41 20,43 Q22,41 20,39" fill={color} opacity="0.8"/>
+                                             {/* String */}
+                                             <path d="M20,43 Q18,48 20,52 Q22,48 20,43" stroke={color} strokeWidth="1.5" fill="none" opacity="0.6" strokeLinecap="round"/>
+                                          </svg>
+                                       </div>
+                                    );
+                                 })}
                               </div>
                            )}
                         </div>
@@ -318,27 +332,47 @@ const Contrast3: React.FC<Contrast3Props> = ({ onAddToCart }) => {
                           .animate-subtle-pulse {
                             animation: subtle-pulse 2s ease-in-out infinite;
                           }
-                          @keyframes confetti-burst {
+                          @keyframes balloon-from-button {
                             0% {
-                              transform: translateY(0) translateX(0) rotate(0deg) scale(0);
+                              transform: translate(-50%, -50%) translateX(var(--start-x)) translateY(0) rotate(0deg) scale(0.5);
                               opacity: 0;
                             }
                             10% {
-                              transform: translateY(-50px) translateX(calc(var(--x) * 0.2)) rotate(calc(var(--r) * 0.1)) scale(1);
+                              transform: translate(-50%, -50%) translateX(var(--start-x)) translateY(-80px) rotate(calc(var(--rotate) * 0.2)) scale(1);
                               opacity: 1;
+                            }
+                            25% {
+                              transform: translate(-50%, -50%) translateX(calc(var(--start-x) + var(--drift) * 0.2)) translateY(-220px) rotate(calc(var(--rotate) * 0.4));
                             }
                             50% {
-                              opacity: 1;
+                              transform: translate(-50%, -50%) translateX(calc(var(--start-x) + var(--drift) * 0.6)) translateY(-520px) rotate(calc(var(--rotate) * 0.7));
+                            }
+                            75% {
+                              transform: translate(-50%, -50%) translateX(calc(var(--start-x) + var(--drift))) translateY(-870px) rotate(var(--rotate));
+                              opacity: 0.8;
                             }
                             100% {
-                              transform: translateY(-500px) translateX(var(--x)) rotate(var(--r)) scale(0.5);
+                              transform: translate(-50%, -50%) translateX(calc(var(--start-x) + var(--drift))) translateY(-1220px) rotate(var(--rotate));
                               opacity: 0;
                             }
                           }
-                          .animate-confetti-burst {
-                            animation: confetti-burst 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+                          .animate-balloon-from-button {
+                            animation: balloon-from-button 4.5s ease-out forwards;
+                            will-change: transform, opacity;
                           }
                         `}</style>
+                     </div>
+
+                     {/* Coordinated Products */}
+                     <div className="mb-6">
+                        <h4 className="text-sm sm:text-[15px] font-semibold text-gray-900 mb-3 sm:mb-4">Coordinated:</h4>
+                        <div className="grid grid-cols-4 gap-3 sm:gap-4">
+                           {productData.coordinated.slice(0, 8).map(prod => (
+                              <div key={prod.id} className="w-full aspect-square rounded-full border-[3px] border-[#B8E4F0] bg-white overflow-hidden hover:scale-105 transition-transform cursor-pointer p-2 sm:p-3">
+                                 <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
+                              </div>
+                           ))}
+                        </div>
                      </div>
 
                      {/* Product Description */}
@@ -397,18 +431,6 @@ const Contrast3: React.FC<Contrast3Props> = ({ onAddToCart }) => {
                                  onClick={() => setReviewIndex(i)}
                                  className={`w-2 h-2 rounded-full transition-all ${i === reviewIndex ? 'bg-[#7EC8E3] w-4' : 'bg-gray-300'}`}
                               />
-                           ))}
-                        </div>
-                     </div>
-
-                     {/* Coordinated Products */}
-                     <div>
-                        <h4 className="text-sm sm:text-[15px] font-semibold text-gray-900 mb-3 sm:mb-4">Coordinated:</h4>
-                        <div className="grid grid-cols-4 gap-3 sm:gap-4">
-                           {productData.coordinated.slice(0, 8).map(prod => (
-                              <div key={prod.id} className="w-full aspect-square rounded-full border-[3px] border-[#B8E4F0] bg-white overflow-hidden hover:scale-105 transition-transform cursor-pointer p-2 sm:p-3">
-                                 <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
-                              </div>
                            ))}
                         </div>
                      </div>

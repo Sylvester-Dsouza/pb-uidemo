@@ -8,7 +8,7 @@ import Contrast2 from './components/Contrast2';
 import Contrast3 from './components/Contrast3';
 
 function App() {
-  const [version, setVersion] = useState<'c1' | 'c2' | 'c3'>('c1');
+  const [version, setVersion] = useState<'c1' | 'c2' | 'c3'>('c3');
   const [cartCount, setCartCount] = useState(0);
 
   const handleAddToCart = () => {
