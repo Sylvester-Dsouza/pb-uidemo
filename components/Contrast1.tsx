@@ -8,7 +8,7 @@ const reviews = [
    { name: 'Anita K.', initial: 'A', rating: 4, text: "Great quality balloon, my kids loved it! Delivery was quick and the product matched the photos exactly. ⭐" },
 ];
 
-const Version4: React.FC = () => {
+const Version3: React.FC = () => {
    const [mainImage, setMainImage] = useState(productData.images[0]);
    const [quantity, setQuantity] = useState(1);
    const [isLiked, setIsLiked] = useState(false);
@@ -172,7 +172,7 @@ const Version4: React.FC = () => {
                      </div>
 
                      {/* Product Title */}
-                     <h1 className="text-[26px] sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-3">
+                     <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-pink-500 leading-tight mb-3">
                         {productData.name}
                      </h1>
 
@@ -210,8 +210,8 @@ const Version4: React.FC = () => {
                         <div className="grid grid-cols-3 gap-2 text-xs sm:text-sm">
                            {productData.attributes.map((attr) => (
                               <div key={attr.label} className="text-center p-1.5 bg-white rounded-lg border border-gray-100">
-                                 <div className="text-gray-500">{attr.label}</div>
-                                 <div className="font-semibold text-gray-900 truncate">{attr.value}</div>
+                                 <div className="text-gray-400">{attr.label}</div>
+                                 <div className="font-semibold text-gray-500 truncate">{attr.value}</div>
                               </div>
                            ))}
                         </div>
@@ -435,4 +435,4 @@ const Version4: React.FC = () => {
    );
 };
 
-export default Version4;
+export default Version3;

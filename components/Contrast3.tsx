@@ -8,7 +8,7 @@ const reviews = [
    { name: 'Anita K.', initial: 'A', rating: 4, text: "Great quality balloon, my kids loved it! Delivery was quick and the product matched the photos exactly. ⭐" },
 ];
 
-const Version4: React.FC = () => {
+const Version6: React.FC = () => {
    const [mainImage, setMainImage] = useState(productData.images[0]);
    const [quantity, setQuantity] = useState(1);
    const [isLiked, setIsLiked] = useState(false);
@@ -172,7 +172,7 @@ const Version4: React.FC = () => {
                      </div>
 
                      {/* Product Title */}
-                     <h1 className="text-[26px] sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-3">
+                     <h1 className="text-[22px] sm:text-2xl lg:text-3xl font-bold text-pink-400 leading-tight mb-3">
                         {productData.name}
                      </h1>
 
@@ -191,14 +191,14 @@ const Version4: React.FC = () => {
                      </div>
 
                      {/* Price Section */}
-                     <div className="bg-[#EDF8FB] rounded-xl p-3 mb-4 border border-[#B8E4F0]/30">
+                     <div className="bg-blue-50 rounded-xl p-3 mb-4 border border-blue-200">
                         <div className="flex items-center justify-between">
                            <div className="flex items-center gap-2">
                               <span className="text-2xl font-bold text-gray-900">₹{productData.price}</span>
                               <span className="text-base text-gray-400 line-through">₹{originalPrice}</span>
-                              <span className="px-2 py-0.5 bg-[#B8E4F0] text-gray-900 text-xs font-bold rounded-full">20% OFF</span>
+                              <span className="px-2 py-0.5 bg-pink-400 text-white text-xs font-bold rounded-full">20% OFF</span>
                            </div>
-                           <p className="text-xs text-[#7EC8E3] font-medium flex items-center gap-1">
+                           <p className="text-xs text-blue-600 font-medium flex items-center gap-1">
                               <Clock className="w-3.5 h-3.5" />
                               Only 8 left!
                            </p>
@@ -210,8 +210,8 @@ const Version4: React.FC = () => {
                         <div className="grid grid-cols-3 gap-2 text-xs sm:text-sm">
                            {productData.attributes.map((attr) => (
                               <div key={attr.label} className="text-center p-1.5 bg-white rounded-lg border border-gray-100">
-                                 <div className="text-gray-500">{attr.label}</div>
-                                 <div className="font-semibold text-gray-900 truncate">{attr.value}</div>
+                                 <div className="text-gray-400">{attr.label}</div>
+                                 <div className="font-semibold text-gray-500 truncate">{attr.value}</div>
                               </div>
                            ))}
                         </div>
@@ -220,29 +220,29 @@ const Version4: React.FC = () => {
                      {/* Express Shipping Section */}
                      <div className="grid grid-cols-4 gap-1 sm:gap-3 mb-4">
                         <div className="flex flex-col items-center text-center group">
-                           <div className="w-10 h-10 bg-[#B8E4F0]/10 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-[#B8E4F0]/20 transition-colors">
-                              <Package className="w-5 h-5 sm:w-6 sm:h-6 text-[#7EC8E3]" />
+                           <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-blue-200 transition-colors">
+                              <Package className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" />
                            </div>
                            <span className="text-[9px] sm:text-[11px] font-semibold text-gray-900 leading-tight">Express</span>
                            <span className="text-[9px] sm:text-[11px] text-gray-500 leading-tight">Shipping</span>
                         </div>
                         <div className="flex flex-col items-center text-center group">
-                           <div className="w-10 h-10 bg-[#B8E4F0]/10 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-[#B8E4F0]/20 transition-colors">
-                              <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-[#7EC8E3]" />
+                           <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-pink-200 transition-colors">
+                              <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-pink-500" />
                            </div>
                            <span className="text-[9px] sm:text-[11px] font-semibold text-gray-900 leading-tight">Quality</span>
                            <span className="text-[9px] sm:text-[11px] text-gray-500 leading-tight">Guarantee</span>
                         </div>
                         <div className="flex flex-col items-center text-center group">
-                           <div className="w-10 h-10 bg-[#B8E4F0]/10 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-[#B8E4F0]/20 transition-colors">
-                              <Truck className="w-5 h-5 sm:w-6 sm:h-6 text-[#7EC8E3]" />
+                           <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-blue-200 transition-colors">
+                              <Truck className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" />
                            </div>
                            <span className="text-[9px] sm:text-[11px] font-semibold text-gray-900 leading-tight">COD</span>
                            <span className="text-[9px] sm:text-[11px] text-gray-500 leading-tight">Available</span>
                         </div>
                         <div className="flex flex-col items-center text-center group">
-                           <div className="w-10 h-10 bg-[#B8E4F0]/10 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-[#B8E4F0]/20 transition-colors">
-                              <RotateCcw className="w-5 h-5 sm:w-6 sm:h-6 text-[#7EC8E3]" />
+                           <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center mb-1.5 group-hover:bg-pink-200 transition-colors">
+                              <RotateCcw className="w-5 h-5 sm:w-6 sm:h-6 text-pink-500" />
                            </div>
                            <span className="text-[9px] sm:text-[11px] font-semibold text-gray-900 leading-tight">Easy</span>
                            <span className="text-[9px] sm:text-[11px] text-gray-500 leading-tight">Returns</span>
@@ -435,4 +435,4 @@ const Version4: React.FC = () => {
    );
 };
 
-export default Version4;
+export default Version6;

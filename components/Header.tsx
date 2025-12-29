@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Search, ShoppingCart, Menu, X } from 'lucide-react';
 
 interface HeaderProps {
-  version: 1 | 2 | 3 | 4 | 5;
-  onVersionChange: (version: 1 | 2 | 3 | 4 | 5) => void;
+  version: 'c1' | 'c2' | 'c3';
+  onVersionChange: (version: 'c1' | 'c2' | 'c3') => void;
 }
 
 const versionOptions = [
-  { id: 1 as const, name: 'Grabo', color: 'bg-blue-600' },
-  { id: 3 as const, name: 'Contrast', color: 'bg-black' },
-  { id: 4 as const, name: 'Classic', color: 'bg-amber-600' },
+  { id: 'c1' as const, name: 'Contrast 1', color: 'bg-black' },
+  { id: 'c2' as const, name: 'Contrast 2', color: 'bg-gray-800' },
+  { id: 'c3' as const, name: 'Contrast 3', color: 'bg-gray-700' },
 ];
 
 const Header: React.FC<HeaderProps> = ({ version, onVersionChange }) => {

@@ -3,23 +3,21 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Version1 from './components/Version1';
 import Version2 from './components/Version2';
-import Version3 from './components/Version3';
-import Version4 from './components/Version4';
-import Version5 from './components/Version5';
+import Contrast1 from './components/Contrast1';
+import Contrast2 from './components/Contrast2';
+import Contrast3 from './components/Contrast3';
 
 function App() {
-  const [version, setVersion] = useState<1 | 2 | 3 | 4 | 5>(1);
+  const [version, setVersion] = useState<'c1' | 'c2' | 'c3'>('c1');
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header version={version} onVersionChange={setVersion} />
 
       <main>
-        {version === 1 && <Version1 />}
-        {version === 2 && <Version2 />}
-        {version === 3 && <Version3 />}
-        {version === 4 && <Version4 />}
-        {version === 5 && <Version5 />}
+        {version === 'c1' && <Contrast1 />}
+        {version === 'c2' && <Contrast2 />}
+        {version === 'c3' && <Contrast3 />}
       </main>
 
       <Footer />

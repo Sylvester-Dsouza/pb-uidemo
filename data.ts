@@ -17,8 +17,8 @@ export const productData: ProductData = {
     { label: 'Size', value: '31" / 45x79 cm' },
     { label: 'Material', value: 'Foil Metallized' },
     { label: 'Gas', value: 'Helium' },
-    { label: 'Language', value: 'No text' },
-    { label: 'Gas Capacity', value: '0,032 m3' },
+    { label: 'Country of Origin', value: 'India' },
+    { label: 'Gas Cost', value: '₹15-20' },
   ],
   tags: ['#Boy', '#Girl'],
   coordinated: [
