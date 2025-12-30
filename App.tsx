@@ -6,9 +6,10 @@ import Version2 from './components/Version2';
 import Contrast1 from './components/Contrast1';
 import Contrast2 from './components/Contrast2';
 import Contrast3 from './components/Contrast3';
+import Contrast4 from './components/Contrast4';
 
 function App() {
-  const [version, setVersion] = useState<'c1' | 'c2' | 'c3'>('c3');
+  const [version, setVersion] = useState<'c1' | 'c2' | 'c3' | 'c4'>('c3');
   const [cartCount, setCartCount] = useState(0);
 
   const handleAddToCart = () => {
@@ -23,6 +24,7 @@ function App() {
         {version === 'c1' && <Contrast1 onAddToCart={handleAddToCart} />}
         {version === 'c2' && <Contrast2 onAddToCart={handleAddToCart} />}
         {version === 'c3' && <Contrast3 onAddToCart={handleAddToCart} />}
+        {version === 'c4' && <Contrast4 onAddToCart={handleAddToCart} />}
       </main>
 
       <Footer />
