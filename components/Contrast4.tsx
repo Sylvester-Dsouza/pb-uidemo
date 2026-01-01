@@ -290,7 +290,7 @@ const Contrast3: React.FC<Contrast3Props> = ({ onAddToCart }) => {
                         </div>
 
                         <button className="w-full bg-gray-900 text-white py-4 rounded-full font-bold text-base hover:bg-gray-800 transition-all animate-subtle-pulse">
-                           Buy Now — Express Shipping
+                           Celebrate Now — Express Shipping
                         </button>
                      </div>
 
