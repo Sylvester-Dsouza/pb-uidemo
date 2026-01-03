@@ -18,8 +18,10 @@ const Header: React.FC<HeaderProps> = ({ version, onVersionChange, cartCount }) 
   return (
     <>
       <header className="bg-[#FAF5EF] border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="text-2xl font-bold tracking-tight">Party Bazaar</span>
+        <div className="max-w-7xl mx-auto px-6 py-[2px] flex items-center justify-between">
+          <div className="flex items-center">
+            <img src="/party-logo.webp" alt="Party Bazaar" className="h-16 md:h-20" />
+          </div>
 
           {/* Version Switcher - Desktop Menu */}
           <nav className="hidden md:flex items-center gap-1">
